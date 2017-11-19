@@ -35,10 +35,10 @@ export default {
     return {
       toolbar: [toolbarDelete, toolbarCreate],
       operation: [operationUpdate, operationDelete],
-      tableInitList: ['code', 'name', 'type', 'unit', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark', 'createdAt', 'updatedAt'],
-      tableFullList: ['code', 'name', 'type', 'unit', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark', 'createdAt', 'updatedAt'],
-      createList: ['code', 'name', 'type', 'unit', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark'],
-      updateList: ['code', 'name', 'type', 'unit', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark'],
+      tableInitList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark', 'createdAt', 'updatedAt'],
+      tableFullList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark', 'createdAt', 'updatedAt'],
+      createList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark'],
+      updateList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark'],
       filterInitList: ['code', 'name', 'type', 'createdAt'],
       columns: {
         code: {
@@ -68,6 +68,7 @@ export default {
         type: {
           label: '商品类别',
           width: 110,
+          type: 'select',
           filter: {
             width: 115,
             type: 'select'
@@ -75,16 +76,6 @@ export default {
           form: {
             type: 'select'
           },
-          options: [{
-            value: 'a',
-            label: '类型1'
-          }, {
-            value: 'b',
-            label: '类型2'
-          }, {
-            value: 'c',
-            label: '类型3'
-          }],
           relation: 'productType',
           sortable: true
         },
@@ -99,6 +90,17 @@ export default {
             type: 'input'
           },
           sortable: true
+        },
+        safeNum: {
+          label: '安全库存',
+          width: 110,
+          filter: {
+            type: 'input'
+          },
+          form: {
+            type: 'input'
+          },
+          sortable: 'custom'
         },
         productNum: {
           label: '仓库库存',

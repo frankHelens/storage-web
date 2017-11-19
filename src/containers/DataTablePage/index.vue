@@ -102,7 +102,7 @@
 import { mapGetters } from 'vuex'
 // import { fetchList, fetchCreate, fetchUpdate, fetchDelete } from '../../utils/api'
 // import md5 from 'md5'
-import { fetchList, fetchCreate, fetchUpdate } from '@/utils/api'
+import { fetch, fetchList, fetchCreate, fetchUpdate } from '@/utils/api'
 import { pinyinInitial } from 'hanyu-pinyin'
 import { cloneDeep } from 'lodash'
 
@@ -439,7 +439,7 @@ export default {
     getRelation (value) {
       this.isLoading = true
       fetch({
-        url: '/relation',
+        url: 'relation',
         params: {
           relationList: this.relationKeys.join(',')
         }
