@@ -37,15 +37,15 @@ export default {
       operation: [operationUpdate, operationDelete],
       tableInitList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark', 'createdAt', 'updatedAt'],
       tableFullList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark', 'createdAt', 'updatedAt'],
-      createList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark'],
-      updateList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark'],
+      createList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'price', 'newPrice', 'remark'],
+      updateList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'price', 'newPrice', 'remark'],
       filterInitList: ['code', 'name', 'type', 'createdAt'],
       columns: {
         code: {
           label: '商品编号',
           width: 110,
           filter: {
-            width: 100,
+            width: 80,
             type: 'input'
           },
           form: {
@@ -82,13 +82,15 @@ export default {
         unit: {
           label: '单位',
           width: 110,
+          type: 'select',
           filter: {
-            type: 'input',
+            type: 'select',
             like: true
           },
           form: {
-            type: 'input'
+            type: 'select'
           },
+          relation: 'unit',
           sortable: true
         },
         safeNum: {
