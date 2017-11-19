@@ -1,0 +1,211 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,th,var,i,b{font-style:normal;font-weight:normal;}
+ol,ul{list-style:none;}
+caption,th{text-align:left;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+q:before,q:after{content: '';}
+abbr,acronym{border:0;}
+input,select,button {outline:none;}
+
+html{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #fff;
+}
+body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #fff;
+}
+.wrapper{
+  height: 100%;
+}
+.ivu-row-flex{
+  height: 100%;
+}
+.content{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  // padding: 25px 20px 10px;
+}
+.main{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  position: relative;
+}
+.title{
+  padding: 0;
+  font-size: 26px;
+  display: block;
+  color: #666;
+  margin: 0 0 15px;
+  font-weight: 300;
+}
+.main-tabs{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.main-tabs .el-tabs__content{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: inherit;
+}
+.main-tabs-pane{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.datatable{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.page-logo a{
+  color: #eee;
+  line-height: 46px;
+  font-size: 18px;
+  text-decoration: none;
+}
+ .el-input--xlarge .el-form-item__label{
+  font-size: 15px;
+  line-height: 15px;
+}
+.el-input--xlarge .el-input__inner{
+  height: 40px;
+} 
+.el-popover[x-placement^="top"] .popper__arrow{
+  left: 50%!important;
+}
+.el-tree{
+  height: 208px;
+  overflow: auto;
+  border-radius: 4px;
+}
+.el-progress-bar__innerText{
+  display: none;
+}
+.el-upload{
+  text-align: left;
+}
+.clearfix:before,
+.clearfix:after{
+  display: table;
+  content: " ";
+}
+.clearfix:after{
+  clear: both;
+}
+.el-pagination{
+  padding: 0;
+}
+/* 修复表单的排版bug  */
+.el-form-item__content {
+  line-height: 35px;
+}
+/*弹出框样式*/
+/* .el-dialog, .el-dialog__header {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.el-dialog--tiny {
+  border-radius: 10px;
+}
+.el-dialog__headerbtn {
+  margin-top: 4px;
+}
+.el-dialog__header {
+  padding: 12px 20px;
+  padding: 10px 20px 10px;
+  *padding: 9px 18px 9px;
+  _padding: 9px 18px 9px;
+  background-color: #03a9f4;
+}
+.el-dialog__header .el-dialog__title {
+  color: #fff;
+}
+.el-dialog__header .el-dialog__close:hover {
+  color: #FFF;
+}
+.el-dialog__body {
+  color: #777777;
+  font-size: 17px;
+}
+.dialog-title {
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+.dialog-content {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.dialog-content li {
+  width: 50%;
+  margin-top: 5px;
+} */
+/*login 输入框样式  */
+.login-form .el-input--xlarge .el-input__inner:focus, .login-form .el-checkbox__input.is-checked .el-checkbox__inner, .login-form .el-checkbox__inner:hover, .login-form .el-checkbox__input.is-focus .el-checkbox__inner{
+  border-color: #ff4949;
+}
+.login-form .el-checkbox__input.is-checked .el-checkbox__inner {
+  background-color: #ff4949;
+}
+/* tab下的表格高度 */
+.tab-style, .main{
+  height: 93%;
+}
+
+.grade .el-form-item{
+  margin-bottom: 0px;
+}
+
+.el-step__line-inner {
+  width: 100%!important;
+}
+/*列表查看按钮太大了*/
+.columns-render .el-button {
+  padding: 0;
+}
+
+/*考评表多选下拉宽tag修改*/
+.grade .el-select__tags-text {
+  display: inline-block;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.grade .el-tag .el-icon-close {
+  top: -8px;
+}
+
+.notify-style {
+  width: 340px;
+}
+
+.aside .el-menu {
+  border-right: 0;
+}
+
+.ivu-table-header th, .ivu-table-fixed-header th{
+  font-weight: bold;
+}
+
+.layout-menu-left, .ivu-menu-dark, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title{
+  background: #323237;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened{
+  background: #27272A;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):hover, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu):hover{
+  background: #27272A;
+}

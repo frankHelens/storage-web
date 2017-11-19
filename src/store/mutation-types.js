@@ -1,0 +1,2 @@
+export const CHANGE_OPEN_NAV = 'CHANGE_OPEN_NAV'
+export const CHANGE_ACTIVE_NAV = 'CHANGE_ACTIVE_NAV'
