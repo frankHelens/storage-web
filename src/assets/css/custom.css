@@ -108,7 +108,7 @@ body{
 }
 /* 修复表单的排版bug  */
 .el-form-item__content {
-  line-height: 33px !important;
+  line-height: 35px !important;
 }
 /*弹出框样式*/
 /* .el-dialog, .el-dialog__header {
@@ -208,4 +208,8 @@ body{
 }
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):hover, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu):hover{
   background: #27272A;
+}
+
+.ivu-dropdown-item{
+  padding: 13px 16px;
 }

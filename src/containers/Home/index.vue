@@ -84,19 +84,19 @@ export default {
       spanLeft: 12,
       spanRight: 12,
       routesPure: [{
-        id: 0,
-        label: '系统管理',
-        url: '/manager',
-        icon: 'gear-b',
-        type: 'MODULE'
-      }, {
-        id: 1,
-        parentId: 0,
-        label: '用户管理',
-        url: '/manager/account',
-        icon: '',
-        type: 'PAGE'
-      }, {
+      //   id: 0,
+      //   label: '系统管理',
+      //   url: '/manager',
+      //   icon: 'gear-b',
+      //   type: 'MODULE'
+      // }, {
+      //   id: 1,
+      //   parentId: 0,
+      //   label: '用户管理',
+      //   url: '/manager/account',
+      //   icon: '',
+      //   type: 'PAGE'
+      // }, {
         id: 2,
         label: '业务办理',
         url: '',
@@ -106,29 +106,29 @@ export default {
         id: 3,
         parentId: 2,
         label: '商品信息',
-        url: '/query/list',
+        url: '/product/list',
         icon: 'document-text',
         type: 'MODULE'
-      }, {
-        id: 4,
-        label: '统计报表',
-        url: '/business/business1',
-        icon: 'stats-bars',
-        type: 'PAGE'
-      }, {
-        id: 5,
-        label: '活跃分析',
-        parentId: 4,
-        url: '/business/business1',
-        icon: '',
-        type: 'PAGE'
-      }, {
-        id: 6,
-        label: '用户留存',
-        parentId: 4,
-        url: '/business/business1',
-        icon: '',
-        type: 'PAGE'
+      // }, {
+      //   id: 4,
+      //   label: '统计报表',
+      //   url: '/business/business1',
+      //   icon: 'stats-bars',
+      //   type: 'PAGE'
+      // }, {
+      //   id: 5,
+      //   label: '活跃分析',
+      //   parentId: 4,
+      //   url: '/business/business1',
+      //   icon: '',
+      //   type: 'PAGE'
+      // }, {
+      //   id: 6,
+      //   label: '用户留存',
+      //   parentId: 4,
+      //   url: '/business/business1',
+      //   icon: '',
+      //   type: 'PAGE'
       }],
       realName: 'Admin',
       data: {

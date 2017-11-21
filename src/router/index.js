@@ -4,10 +4,10 @@ import { logout } from '@/utils/auth'
 import Home from '@/containers/Home'
 import Login from '@/containers/Login'
 import NotFound from '@/containers/Common/NotFound'
-// import Query from '@/containers/Query'
+// import product from '@/containers/product'
 
 // import taskRoutes from './task'
-import queryRoutes from './query'
+import productRoutes from './product'
 // import managerRoutes from './manager'
 // import interactRoutes from './interact'
 // import statRoutes from './stat'
@@ -27,7 +27,7 @@ const routes = [
   { path: '/',
     component: Home,
     children: [
-      queryRoutes
+      productRoutes
       // baseRoutes,
       // managerRoutes,
       // interactRoutes,
@@ -36,7 +36,7 @@ const routes = [
       // guideRoutes,
       // fingcheckRoutes
     ],
-    redirect: '/query/list',
+    redirect: '/product/list',
     beforeEnter: requireAuth
   },
   { path: '/login', component: Login },

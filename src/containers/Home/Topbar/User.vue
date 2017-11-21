@@ -44,7 +44,7 @@ export default {
 .user-icon
   vertical-align: middle
 .user-name
-  font-size: 17px
+  font-size: 16px
   margin-right: 5px
   @extend .user-icon
 </style>
