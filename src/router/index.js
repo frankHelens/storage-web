@@ -4,20 +4,8 @@ import { logout } from '@/utils/auth'
 import Home from '@/containers/Home'
 import Login from '@/containers/Login'
 import NotFound from '@/containers/Common/NotFound'
-// import product from '@/containers/product'
-
-// import taskRoutes from './task'
-import productRoutes from './product'
-// import managerRoutes from './manager'
-// import interactRoutes from './interact'
-// import statRoutes from './stat'
-// import configRoutes from './config'
-// import guideRoutes from './guide'
-// import fingcheckRoutes from './fingcheck'
-
-// import systemRoutes from './system'
-// import warningRoutes from './warning'
-// import recordRoutes from './record'
+import baseRoutes from './base'
+import manageRoutes from './manage'
 
 function requireAuth (to, from, next) {
   next()
@@ -27,16 +15,10 @@ const routes = [
   { path: '/',
     component: Home,
     children: [
-      productRoutes
-      // baseRoutes,
-      // managerRoutes,
-      // interactRoutes,
-      // statRoutes,
-      // configRoutes,
-      // guideRoutes,
-      // fingcheckRoutes
+      baseRoutes,
+      manageRoutes
     ],
-    redirect: '/product/list',
+    redirect: '/base/product',
     beforeEnter: requireAuth
   },
   { path: '/login', component: Login },

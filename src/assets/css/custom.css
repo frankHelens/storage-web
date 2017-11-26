@@ -213,3 +213,7 @@ body{
 .ivu-dropdown-item{
   padding: 13px 16px;
 }
+
+.ivu-table{
+  font-size: 14px;
+}

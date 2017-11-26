@@ -98,30 +98,30 @@ export default {
       //   type: 'PAGE'
       // }, {
         id: 2,
-        label: '业务办理',
+        label: '基础信息',
         url: '',
         icon: 'document-text',
         type: 'MODULE'
       }, {
         id: 3,
         parentId: 2,
-        label: '商品信息',
-        url: '/product/list',
+        label: '商品列表',
+        url: '/base/product',
         icon: 'document-text',
         type: 'MODULE'
-      // }, {
-      //   id: 4,
-      //   label: '统计报表',
-      //   url: '/business/business1',
-      //   icon: 'stats-bars',
-      //   type: 'PAGE'
-      // }, {
-      //   id: 5,
-      //   label: '活跃分析',
-      //   parentId: 4,
-      //   url: '/business/business1',
-      //   icon: '',
-      //   type: 'PAGE'
+      }, {
+        id: 4,
+        label: '业务办理',
+        url: '',
+        icon: 'ios-compose',
+        type: 'PAGE'
+      }, {
+        id: 5,
+        label: '入库管理',
+        parentId: 4,
+        url: '/manage/enterStock',
+        icon: '',
+        type: 'PAGE'
       // }, {
       //   id: 6,
       //   label: '用户留存',
