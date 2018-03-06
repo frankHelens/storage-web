@@ -1,7 +1,7 @@
 export default {
   code: {
     label: '订单编号',
-    width: 150,
+    width: 160,
     filter: {
       width: 80,
       type: 'input',

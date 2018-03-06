@@ -2,11 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import router from './router'
 import store from './store'
-import 'element-ui/lib/theme-chalk/index.css'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
-// import './assets/my-theme/dist/iview.css'
 import './assets/css/custom.css'
+import moment from 'moment'
+import { momentReset } from '@/utils/reset'
 
 import {
   Pagination,
@@ -69,38 +69,12 @@ Vue.prototype.$prompt = MessageBox.prompt
 Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message
 
-// import 'babel-polyfill'
-// import echarts from 'echarts/lib/echarts'
-// import 'echarts/lib/chart/pie'
-// import 'echarts/lib/chart/bar'
-// import 'echarts/lib/component/tooltip'
-// import 'echarts/lib/component/title'
-// import 'echarts/lib/component/legend'
+momentReset(moment)
+
+Object.defineProperty(Vue.prototype, '$moment', { value: moment })
 Vue.use(iView)
 Vue.use(VueRouter)
-// Vue.use(ElementUI)
 
-// const colorPalette = [
-//   '#48b0f7',
-//   '#f55753',
-//   '#f8d053',
-//   '#ff783c',
-//   '#6d5cae',
-//   '#10cfbd',
-//   '#2bc164',
-//   '#b1b3b5'
-// ]
-// echarts.registerTheme('vintage', {
-//   color: colorPalette,
-//   // backgroundColor: '#fef8ef',
-//   graph: {
-//     color: colorPalette
-//   }
-// })
-
-// Vue.prototype.$echarts = echarts
-
-// Vue.config.productionTip = false
 const App = {
   template: '<router-view></router-view>'
 }
