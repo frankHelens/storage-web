@@ -7,6 +7,7 @@ import 'iview/dist/styles/iview.css'
 import './assets/css/custom.css'
 import moment from 'moment'
 import { momentReset } from '@/utils/reset'
+import api from './utils/api'
 
 import {
   Pagination,
@@ -59,6 +60,8 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Upload)
 Vue.use(Loading.directive)
+
+Vue.use(api)
 
 Vue.prototype.$ELEMENT = { size: 'small' }
 Vue.prototype.$loading = Loading.service

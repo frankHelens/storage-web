@@ -124,6 +124,72 @@ export function fetchBatchDelete (props) {
   })
 }
 
-export function fetchTest (test) {
-  return console.log(test)
+const httpGet = ({ url, params }) => {
+  return fetch({
+    method: 'get',
+    url,
+    params
+  })
 }
+
+const httpPost = ({ url, data }) => {
+  return fetch({
+    method: 'post',
+    url,
+    data
+  })
+}
+
+const httpPut = ({ url, data }) => {
+  return fetch({
+    method: 'put',
+    url,
+    data
+  })
+}
+
+const httpPatch = ({ url, data }) => {
+  return fetch({
+    method: 'patch',
+    url,
+    data
+  })
+}
+
+const httpDelete = ({ url }) => {
+  return fetch({
+    method: 'delete',
+    url
+  })
+}
+
+const httpBatchDelete = ({ url, data }) => {
+  return fetch({
+    method: 'delete',
+    url: url,
+    data: data
+  })
+}
+
+const getRelation = ({ relations }) => {
+  return fetch({
+    method: 'get',
+    url: '/relation',
+    params: { relationList: relations }
+  })
+}
+
+const api = {
+  install (Vue, options) {
+    Vue.prototype.$fetch = fetch
+    Vue.prototype.$get = httpGet
+    Vue.prototype.$post = httpPost
+    Vue.prototype.$patch = httpPatch
+    Vue.prototype.$put = httpPut
+    Vue.prototype.$delete = httpDelete
+    Vue.prototype.$batchDelete = httpBatchDelete
+    Vue.prototype.$getRelation = getRelation
+  }
+}
+
+export default api

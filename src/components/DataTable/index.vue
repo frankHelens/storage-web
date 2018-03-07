@@ -29,7 +29,7 @@ export default {
     },
     tableFullList: {
       type: Array,
-      default: []
+      default: () => []
     },
     isLoading: {
       type: Boolean,
