@@ -33,6 +33,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.pug$/,
+        loader: 'pug'
+      },
+      {
         test: /iview.src.*?js$/,
         loader: 'babel-loader'
       },
