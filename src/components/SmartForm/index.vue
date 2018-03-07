@@ -25,8 +25,8 @@
       </el-row>
       <smart-form-item
         v-else
-        v-for="(columnName,index) in formList"
-        :key="columnName"
+        v-for="(columnName, index) in formList"
+        :key="index"
         :columnName="columnName"
         :column="columns[columnName]"
         :value="formValues[columnName]"
