@@ -10,8 +10,8 @@
       :label-width="labelWidth">
       <el-row v-if="!inline" :gutter="gutter">
         <el-col
-          v-for="(columnName,index) in formList"
-          :key="columnName"
+          v-for="(columnName, index) in formList"
+          :key="index"
           :span="columns[columnName].form.size || 24">
           <smart-form-item
             :columnName="columnName"
