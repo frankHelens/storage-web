@@ -1,5 +1,6 @@
 <template lang="pug">
   FormTablePage(
+    ref="formTablepage"
     :formList="formList"
     :tableList="tableList"
     :tableData="tableData"
@@ -10,7 +11,7 @@
 
 <script>
 import FormTablePage from '@/containers/FormTablePage'
-import columns from '@/containers/Manage/columns'
+import { getColumns } from '@/containers/Manage/columns'
 
 export default {
   components: {
@@ -19,10 +20,8 @@ export default {
   data () {
     return {
       formList: ['origin', 'storageType', 'enterPrice', 'takePe', 'makePe', 'remark'],
-      tableList: ['productId', 'enterNum', 'discount', 'remark'],
-      columns: {
-        ...columns
-      },
+      tableList: ['productName', 'productId', 'enterNum', 'discount', 'remark'],
+      columns: getColumns(this),
       values: {},
       submitResource: 'enterStock/detail',
       tableData: [{
@@ -50,7 +49,14 @@ export default {
         enterNum: 100,
         discount: 100,
         remark: '测试测试'
-      }]
+      }],
+      productOptions: [],
+      loading: false
+    }
+  },
+  methods: {
+    getProducts (props) {
+      return this.$get(props)
     }
   }
 }
