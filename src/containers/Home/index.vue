@@ -72,6 +72,8 @@
 <script>
 import { treeFormat, TITLE } from '@/utils/common'
 import Topbar from './Topbar'
+import { cloneDeep } from 'lodash'
+import menus from '@/utils/menu'
 
 export default {
   components: {
@@ -83,53 +85,7 @@ export default {
       isClose: false,
       spanLeft: 12,
       spanRight: 12,
-      routesPure: [{
-      //   id: 0,
-      //   label: '系统管理',
-      //   url: '/manager',
-      //   icon: 'gear-b',
-      //   type: 'MODULE'
-      // }, {
-      //   id: 1,
-      //   parentId: 0,
-      //   label: '用户管理',
-      //   url: '/manager/account',
-      //   icon: '',
-      //   type: 'PAGE'
-      // }, {
-        id: 2,
-        label: '基础信息',
-        url: '',
-        icon: 'document-text',
-        type: 'MODULE'
-      }, {
-        id: 3,
-        parentId: 2,
-        label: '商品列表',
-        url: '/base/product',
-        icon: 'document-text',
-        type: 'MODULE'
-      }, {
-        id: 4,
-        label: '业务办理',
-        url: '',
-        icon: 'ios-compose',
-        type: 'PAGE'
-      }, {
-        id: 5,
-        label: '入库管理',
-        parentId: 4,
-        url: '/manage/enterStock',
-        icon: '',
-        type: 'PAGE'
-      // }, {
-      //   id: 6,
-      //   label: '用户留存',
-      //   parentId: 4,
-      //   url: '/business/business1',
-      //   icon: '',
-      //   type: 'PAGE'
-      }],
+      routesPure: menus,
       realName: 'Admin',
       data: {
         'id': 1,
@@ -137,24 +93,33 @@ export default {
         'name': 'Admin',
         'menus': []
       },
-      activeName: 0,
-      openNames: [],
       BreadcrumbList: []
     }
   },
+  watch: {
+    $route (to) {
+      const { path } = to
+      this.getBreadcrumbList(path)
+    }
+  },
   created () {
-    const activeUrl = this.routesPure.find(routes => routes.url === this.$route.path)
-    const parentUrl = this.routesPure.find(routes => routes.id === activeUrl.parentId)
-    this.activeName = activeUrl ? activeUrl.id : 0
-    this.openNames = parentUrl ? [parentUrl.id] : []
-    this.BreadcrumbList = parentUrl ? [parentUrl, activeUrl] : [activeUrl]
+    this.getBreadcrumbList(this.$route.path)
   },
   computed: {
+    activeName () {
+      const bread = this.BreadcrumbList.find(bread => bread.url === this.$route.path)
+      return bread ? bread.id : 0
+    },
+    openNames () {
+      console.log([this.BreadcrumbList[0].id])
+      return [this.BreadcrumbList[0].id]
+    },
     iconSize () {
       return this.isClose ? 24 : 19
     },
     navlist () {
-      return treeFormat(this.routesPure, 'id', 'parentId')
+      const navList = cloneDeep(this.routesPure).filter(item => !item.noMenu)
+      return treeFormat(navList, 'id', 'parentId')
     }
   },
   methods: {
@@ -164,6 +129,31 @@ export default {
     },
     toggleClick () {
       this.isClose = !this.isClose
+    },
+    getBreadcrumbList (path) { // 获取面包屑
+      let breadcrumbList = []
+      const getActiveUrl = (path) => {
+        const activeUrl = this.routesPure.find(routes => routes.url === path)
+        if (activeUrl) {
+          breadcrumbList.unshift({
+            url: activeUrl.url,
+            label: activeUrl.label,
+            id: activeUrl.id
+          })
+        }
+        const parentUrl = this.routesPure.find(routes => routes.id === activeUrl.parentId)
+        if (parentUrl.url === '') {
+          breadcrumbList.unshift({
+            url: parentUrl.url,
+            label: parentUrl.label,
+            id: parentUrl.id
+          })
+        } else {
+          getActiveUrl(parentUrl.url)
+        }
+      }
+      getActiveUrl(path)
+      this.BreadcrumbList = breadcrumbList
     }
   }
 }
@@ -182,7 +172,7 @@ $topHeight: 50px
 .layout-breadcrumb
   padding: 10px 15px 0
 .layout-content
-  flex: 1px;
+  flex: 1px
   min-height: 200px
   margin: 15px
   overflow: hidden
