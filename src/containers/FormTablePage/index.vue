@@ -6,23 +6,22 @@
       :columns="columnsList"
       :values="values"
       :buttonList="buttonList")
-    DataTable(
-      :columns="columnsList"
-      :tableInitList="tableList"
+    FormTable(
       :tableData="tableData"
-    )
+      :tableList="tableList"
+      :columns="formTableColumns")
 </template>
 
 <script>
 import SmartForm from '@/components/SmartForm'
-import DataTable from '@/components/DataTable'
+import FormTable from '@/components/FormTable'
 import { cloneDeep } from 'lodash'
 import { fetch } from '@/utils/api'
 
 export default {
   components: {
     SmartForm,
-    DataTable
+    FormTable
   },
   props: {
     tableData: {
@@ -83,6 +82,10 @@ export default {
           })
         }
       }]
+    },
+    formTableColumns: {
+      type: Object,
+      default: () => {}
     }
   },
   created () {
@@ -95,7 +98,8 @@ export default {
     return {
       relationKeys: relationKeys,
       columnsList: columnsList,
-      hasData: false
+      hasData: false,
+      createList: ['productName']
     }
   },
   methods: {
