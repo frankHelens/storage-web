@@ -44,6 +44,8 @@
       :isExpand="isExpand"
       :selection="selection"
       :pageStorage="pageStorage"
+      :isHighlightRow="isHighlightRow"
+      :onRowDblclick="onRowDblclick"
       @changeOrderBy="changeOrderBy"
       @changeSelection="changeSelection"
     />
@@ -250,7 +252,15 @@ export default {
       type: Boolean,
       default: false
     },
-    isExpand: Function
+    isExpand: Function,
+    isHighlightRow: {
+      type: Boolean,
+      default: false
+    },
+    onRowDblclick: {
+      type: Function,
+      default: () => ({})
+    }
   },
   data () {
     // 字段信息

@@ -6,8 +6,10 @@
       :height="tableWrapperHeight"
       :columns="columnsList"
       :data="tableData"
+      :highlight-row="isHighlightRow"
       @on-selection-change="changeSelection"
-      @on-sort-change="changeOrderBy">
+      @on-sort-change="changeOrderBy"
+      @on-row-dblclick="onRowDblclick">
     </Table>
   </div>
 </template>
@@ -54,6 +56,14 @@ export default {
     selection: {
       type: Boolean,
       default: false
+    },
+    isHighlightRow: {
+      type: Boolean,
+      default: false
+    },
+    onRowDblclick: {
+      type: Function,
+      default: () => ({})
     }
   },
   data () {
@@ -115,6 +125,9 @@ export default {
         this.$emit('changeOrderBy', options)
       }
     }
+    // onRowDblclick (row, index) {
+    //   console.log(row, index)
+    // }
   }
 }
 </script>
