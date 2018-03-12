@@ -20,7 +20,9 @@ import {
   OptionGroup,
   Button,
   ButtonGroup,
-  // DatePicker,
+  Table,
+  TableColumn,
+  DatePicker,
   Tooltip,
   Form,
   FormItem,
@@ -38,6 +40,7 @@ import {
 } from 'element-ui'
 
 Vue.use(Pagination)
+Vue.use(DatePicker)
 Vue.use(Checkbox)
 Vue.use(Dialog)
 Vue.use(Input)
@@ -48,7 +51,8 @@ Vue.use(Option)
 Vue.use(OptionGroup)
 Vue.use(Button)
 Vue.use(ButtonGroup)
-// Vue.use(DatePicker)
+Vue.use(Table)
+Vue.use(TableColumn)
 Vue.use(Tooltip)
 Vue.use(Form)
 Vue.use(FormItem)
