@@ -3,7 +3,7 @@ export default {
     label: '订单编号',
     width: 160,
     filter: {
-      width: 80,
+      width: 145,
       type: 'input',
       like: true
     },

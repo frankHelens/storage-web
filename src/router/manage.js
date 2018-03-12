@@ -8,6 +8,7 @@ export default {
   },
   children: [
     { path: 'enterStock', component: EnterStock },
-    { path: 'enterStockDetail', component: EnterStockDetail }
+    { path: 'enterStockDetail', component: EnterStockDetail },
+    { path: 'enterStockDetail/:id', component: EnterStockDetail }
   ]
 }

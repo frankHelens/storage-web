@@ -1,5 +1,5 @@
-<template>
-  <DataTablePage
+<template lang="pug">
+  DataTablePage(
     ref="table"
     mainColumn="name"
     longColumn="num"
@@ -16,8 +16,9 @@
     :createList="createList"
     :updateList="updateList"
     :operation="operation"
-    :columns="columns">
-  </DataTablePage>
+    :columns="columns"
+    :isHighlightRow="true"
+    :onRowDblclick="onRowDblclick")
 </template>
 
 <script>
@@ -30,6 +31,7 @@ export default {
     DataTablePage
   },
   data () {
+    const _this = this
     return {
       toolbar: [{
         name: 'create',
@@ -47,6 +49,9 @@ export default {
       filterInitList: ['code', 'origin', 'createdAt'],
       columns: {
         ...columns
+      },
+      onRowDblclick (row, index) { // 双击事件
+        _this.$router.push('/manage/enterStockDetail/' + row.id)
       }
     }
   }
