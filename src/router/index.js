@@ -6,6 +6,7 @@ import Login from '@/containers/Login'
 import NotFound from '@/containers/Common/NotFound'
 import baseRoutes from './base'
 import manageRoutes from './manage'
+import Test from '@/containers/Test'
 
 function requireAuth (to, from, next) {
   next()
@@ -28,7 +29,8 @@ const routes = [
       next('/login')
     }
   },
-  { path: '*', component: NotFound }
+  { path: '*', component: NotFound },
+  { path: '/test', component: Test }
 ]
 
 const router = new VueRouter({
