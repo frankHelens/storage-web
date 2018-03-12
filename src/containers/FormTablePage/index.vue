@@ -5,11 +5,15 @@
       :formList="formList"
       :columns="columnsList"
       :values="values"
-      :buttonList="buttonList")
+      @changeFormValue="changeFormValue")
+    ButtonList(
+      :data="formTableData"
+      :buttonList="formTableButtonList")
     FormTable(
       :tableData="tableData"
       :tableList="tableList"
-      :columns="formTableColumns")
+      :columns="formTableColumnsList"
+      @changeDatas="changeDatas")
 </template>
 
 <script>
@@ -17,11 +21,13 @@ import SmartForm from '@/components/SmartForm'
 import FormTable from '@/components/FormTable'
 import { cloneDeep } from 'lodash'
 import { fetch } from '@/utils/api'
+import ButtonList from '@/components/ButtonList'
 
 export default {
   components: {
     SmartForm,
-    FormTable
+    FormTable,
+    ButtonList
   },
   props: {
     tableData: {
@@ -52,37 +58,6 @@ export default {
       type: Object,
       default: () => {}
     },
-    buttonList: {
-      type: Array,
-      default: () => [{
-        name: 'submit',
-        label: '提交',
-        func: (data, props) => {
-          const { $parent } = props.el
-          $parent.$post({
-            url: $parent.submitResource,
-            data: {
-              base: data,
-              tableData: [{
-                productId: 100,
-                enterNum: 200,
-                discount: 100,
-                remark: '这个是单个的商品价格1'
-              }]
-            }
-          })
-          .then(data => {
-            if (data) {
-              $parent.$message({
-                message: '添加成功！',
-                type: 'success'
-              })
-              $parent.$router.push('/manage/enterStock')
-            }
-          })
-        }
-      }]
-    },
     formTableColumns: {
       type: Object,
       default: () => {}
@@ -93,17 +68,53 @@ export default {
   },
   data () {
     const columnsList = cloneDeep(this.columns)
-    const columnsKeys = Object.keys(columnsList)
-    const relationKeys = columnsKeys.filter(key => columnsList[key].relation).map(key => columnsList[key].relation)
+    const formTableColumnsList = cloneDeep(this.formTableColumns)
     return {
-      relationKeys: relationKeys,
+      relationKeys: this.getRelationKeys({...columnsList, ...formTableColumnsList}),
       columnsList: columnsList,
+      formTableColumnsList: formTableColumnsList,
       hasData: false,
-      createList: ['productName']
+      formTableButtonList: [{ // 提交
+        name: 'formtableSubmit',
+        label: '提交',
+        funcProps: {
+          fromTable: this
+        },
+        func: (data, {fromTable}) => {
+          console.log(data)
+          fromTable.$post({
+            url: fromTable.submitResource,
+            data: data
+          })
+          .then(data => {
+            if (data) {
+              fromTable.$message({
+                message: '添加成功！',
+                type: 'success'
+              })
+              fromTable.$router.push('/manage/enterStock')
+            }
+          })
+        }
+      }],
+      formTableData: {
+        base: {},
+        tableData: this.tableData
+      } // 数据列表
     }
   },
   methods: {
-    getRelation () {
+    changeFormValue (values) { // 获取form的数据
+      this.formTableData.base = values
+    },
+    changeDatas (list) { // 获取表格form的数据
+      this.formTableData.tableData = list
+    },
+    getRelationKeys (list) { // 获取字典表的key
+      const keys = Object.keys(list)
+      return keys.filter(key => list[key].relation).map(key => list[key].relation)
+    },
+    getRelation () { // 获取字典表项
       this.hasData = false
       fetch({
         url: 'relation',
@@ -112,24 +123,29 @@ export default {
         }
       })
       .then((data) => {
-        Object.keys(this.columnsList).map(key => {
-          const relation = this.columnsList[key].relation
-          if (data[relation]) {
-            this.columnsList[key].options = [...this.columnsList[key].optionsInit || [], ...data[relation]].map(option => {
-              const label = option[this.columnsList[key].labelName || 'label']
-              return {
-                value: option.value !== undefined ? option.value : option.id,
-                label,
-                ...option
-              }
-            })
-          }
-        })
+        this.setOptions(this.columnsList, data)
+        this.setOptions(this.formTableColumnsList, data)
         this.$emit('getRelation', this.columnsList)
         this.hasData = true
         // this.getData()
       }).catch(() => {
       })
+    },
+    setOptions (columnsList, data) { // 获取的下拉列表
+      Object.keys(columnsList).map(key => {
+        const relation = columnsList[key].relation
+        if (data[relation]) {
+          columnsList[key].options = [...columnsList[key].optionsInit || [], ...data[relation]].map(option => {
+            const label = option[columnsList[key].labelName || 'label']
+            return {
+              value: option.value !== undefined ? option.value : option.id,
+              label,
+              ...option
+            }
+          })
+        }
+      })
+      return columnsList
     }
   }
 }

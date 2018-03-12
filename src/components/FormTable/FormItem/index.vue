@@ -16,6 +16,20 @@
       :key="index"
       :label="item.label"
       :value="item.value")
+  el-select(
+    clearable
+    v-else-if="type === 'select'"
+    v-model="currentValue")
+    el-option(
+      v-for="(item, index) in options"
+      :key="index"
+      :label="item.label"
+      :value="item.value")
+  InputNumber(
+    v-else-if="type === 'number'"
+    :min="min"
+    :max="max"
+    v-model="currentValue")    
   //- el-date-picker(
   //-   v-else-if="type === 'date'"
   //-   type="date"
@@ -49,23 +63,37 @@ export default {
     options: {
       type: Array,
       default: () => []
-    }
+    },
+    min: Number,
+    max: Number
   },
   computed: {
     currentValue: {
       get () {
-        return this.value
+        if (this.type === 'number') {
+          return this.value || 0
+        } else {
+          return this.value
+        }
       },
       set (val) {
-        this.$emit('changeValues', this.queryDatas.find(item => val === item[this.column.property]), this.values.id)
-        this.$emit('input', val)
+        if (this.type === 'remoteSelect') {
+          if (val !== '') {
+            this.$emit('changeValues', this.queryDatas.find(item => val === item[this.column.property]), this.values.id)
+          } else {
+            this.$emit('changeValues', {}, this.values.id)
+          }
+        } else {
+          this.$emit('changeValues', this.queryDatas.find(item => val === item[this.column.property]), this.values.id)
+          this.$emit('input', val)
+        }
       }
     }
   },
   data () {
     return {
       loading: false,
-      remoteOptions: this.options,
+      remoteOptions: [],
       queryDatas: []
     }
   },

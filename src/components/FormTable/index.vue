@@ -20,6 +20,7 @@
           v-bind="columns[scope.column.property].tableForm"
           :column="scope.column"
           :values="scope.row"
+          :options="columns[scope.column.property].options"
           @changeValues="changeValues")
 </template>
 
@@ -57,17 +58,12 @@ export default {
     }
   },
   methods: {
-    test (e) {
-      console.log(e)
-    },
     changeValues (values, id) {
-      // let currentValues = this.currentData.find(item => item.id === values.id)
-      // currentValues = values
       if (values) {
         const index = this.currentData.findIndex(item => item.id === id)
         this.$set(this.currentData, index, values)
-        console.log(this.currentData)
       }
+      this.$emit('changeDatas', this.currentData)
     }
   }
 }
