@@ -140,16 +140,16 @@ export default {
             label: activeUrl.label,
             id: activeUrl.id
           })
-        }
-        const parentUrl = this.routesPure.find(routes => routes.id === activeUrl.parentId)
-        if (parentUrl.url === '') {
-          breadcrumbList.unshift({
-            url: parentUrl.url,
-            label: parentUrl.label,
-            id: parentUrl.id
-          })
-        } else {
-          getActiveUrl(parentUrl.url)
+          const parentUrl = this.routesPure.find(routes => routes.id === activeUrl.parentId)
+          if (parentUrl.url === '') {
+            breadcrumbList.unshift({
+              url: parentUrl.url,
+              label: parentUrl.label,
+              id: parentUrl.id
+            })
+          } else {
+            getActiveUrl(parentUrl.url)
+          }
         }
       }
       getActiveUrl(path)
