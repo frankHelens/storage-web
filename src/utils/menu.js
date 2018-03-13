@@ -45,4 +45,12 @@ export default [{
   icon: '',
   type: 'PAGE',
   noMenu: true
+}, {
+  id: 7,
+  label: '入库单',
+  parentId: 5,
+  url: '/manage/enterStockDetail/:id',
+  icon: '',
+  type: 'PAGE',
+  noMenu: true
 }]
