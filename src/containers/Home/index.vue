@@ -98,12 +98,15 @@ export default {
   },
   watch: {
     $route (to) {
-      const { path } = to
+      const { matched } = to
+      const { path } = matched[matched.length - 1]
       this.getBreadcrumbList(path)
     }
   },
   created () {
-    this.getBreadcrumbList(this.$route.path)
+    const { matched } = this.$route
+    const { path } = matched[matched.length - 1]
+    this.getBreadcrumbList(path)
   },
   computed: {
     activeName () {
@@ -111,7 +114,6 @@ export default {
       return bread ? bread.id : 0
     },
     openNames () {
-      console.log([this.BreadcrumbList[0].id])
       return [this.BreadcrumbList[0].id]
     },
     iconSize () {
