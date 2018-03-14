@@ -29,17 +29,14 @@
     v-else-if="type === 'number'"
     :min="min"
     :max="max"
-    v-model="currentValue")    
-  //- el-date-picker(
-  //-   v-else-if="type === 'date'"
-  //-   type="date"
-  //-   v-model="currentValue")
+    v-model="currentValue")
 </template>
 
 <script>
 export default {
   props: {
     value: String | Number,
+    name: String,
     type: {
       type: String,
       default: 'input'
@@ -65,10 +62,11 @@ export default {
       default: () => []
     },
     min: Number,
-    max: Number
+    max: Number,
+    index: Number
   },
   computed: {
-    currentValue: {
+    currentValue: { // 双向绑定数据
       get () {
         if (this.type === 'number') {
           return this.value || 0
@@ -78,13 +76,14 @@ export default {
       },
       set (val) {
         if (this.type === 'remoteSelect') {
+          const { remoteName } = this.column.tableForm
           if (val !== '') {
-            this.$emit('changeValues', this.queryDatas.find(item => val === item[this.column.property]), this.values.id)
+            this.$emit('changeValues', this.queryDatas.find(item => val === item[remoteName]), this.index)
           } else {
-            this.$emit('changeValues', {}, this.values.id)
+            this.$emit('changeValues', {}, this.index)
           }
         } else {
-          this.$emit('changeValues', this.queryDatas.find(item => val === item[this.column.property]), this.values.id)
+          this.$emit('changeValues', this.queryDatas.find(item => val === item[this.name]), this.index)
           this.$emit('input', val)
         }
       }
@@ -98,15 +97,15 @@ export default {
     }
   },
   methods: {
-    remoteFunc (val) {
+    remoteFunc (val) { // 远程查询方法
       this.loading = true
-      const { property } = this.column
+      const { remoteName } = this.column.tableForm
       if (val) {
         setTimeout(() => {
           this.$get({
             url: this.remoteResource,
             params: {
-              filterBy: property + '|like|' + val
+              filterBy: remoteName + '|like|' + val
             }
           })
           .then(data => {
@@ -114,8 +113,8 @@ export default {
             if (data) {
               this.remoteOptions = data.data.map(item => {
                 return {
-                  value: item[property],
-                  label: item[property]
+                  value: item[remoteName],
+                  label: item[remoteName]
                 }
               })
               this.queryDatas = data.data

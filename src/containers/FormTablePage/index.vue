@@ -50,6 +50,10 @@ export default {
       type: Array,
       default: () => []
     },
+    tableSubmitList: {
+      type: Array,
+      default: () => []
+    },
     columns: {
       type: Object,
       default: () => {}
@@ -81,10 +85,11 @@ export default {
           fromTable: this
         },
         func: (data, {fromTable}) => {
-          console.log(data)
+          const { tableSubmitList, submitResource } = fromTable
+          const postData = this.setPostData(data, tableSubmitList)
           fromTable.$post({
-            url: fromTable.submitResource,
-            data: data
+            url: submitResource,
+            data: postData
           })
           .then(data => {
             if (data) {
@@ -104,6 +109,21 @@ export default {
     }
   },
   methods: {
+    setPostData (data, submitList) {
+      const { tableData, base } = data
+      const filterData = tableData.filter(item => Object.keys(item).length > 1)
+      const submitTableData = filterData.map(data => {
+        let values = {}
+        submitList.map(item => {
+          values[item] = data[item]
+        })
+        return values
+      })
+      return {
+        base,
+        tableData: submitTableData
+      }
+    },
     changeFormValue (values) { // 获取form的数据
       this.formTableData.base = values
     },

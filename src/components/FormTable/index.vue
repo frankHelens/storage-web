@@ -3,7 +3,6 @@
     stripe
     border
     highlight-current-row
-    :header-row-style="headerRowStyle"
     :size="size"
     :data="currentData"
     style="width: 100%")
@@ -16,9 +15,11 @@
       :width="columns[column].width")
       template(scope="scope")
         FormItem(
+          :index="scope.$index"
+          :name="scope.column.property"
           v-model="scope.row[scope.column.property]"
           v-bind="columns[scope.column.property].tableForm"
-          :column="scope.column"
+          :column="columns[scope.column.property]"
           :values="scope.row"
           :options="columns[scope.column.property].options"
           @changeValues="changeValues")
@@ -51,17 +52,24 @@ export default {
   },
   data () {
     return {
-      headerRowStyle: {
-        // textAlign: 'center'
-      },
       currentData: this.tableData
     }
   },
   methods: {
-    changeValues (values, id) {
+    changeValues (values, index) {
       if (values) {
-        const index = this.currentData.findIndex(item => item.id === id)
-        this.$set(this.currentData, index, values)
+        let currentValues = values
+        Object.keys(this.columns).filter(key => {
+          return this.columns[key].tableForm
+        }).map(item => {
+          const { remoteName } = this.columns[item].tableForm
+          if (remoteName) {
+            if (values[remoteName]) {
+              currentValues[item] = values[remoteName] || ''
+            }
+          }
+        })
+        this.$set(this.currentData, index, currentValues)
       }
       this.$emit('changeDatas', this.currentData)
     }

@@ -120,9 +120,24 @@ export const formColumns = {
 }
 
 export const formTableColumns = {
+  productId: {
+    label: '商品ID',
+    width: 110,
+    filter: {
+      width: 80,
+      type: 'input'
+    },
+    tableForm: {
+      type: 'input',
+      remoteName: 'id'
+    },
+    form: {
+      type: 'select'
+    }
+  },
   code: {
     label: '商品编号',
-    width: 110,
+    width: 180,
     filter: {
       width: 80,
       type: 'input'
@@ -131,12 +146,13 @@ export const formTableColumns = {
       type: 'select'
     },
     tableForm: {
-      type: 'remoteSelect'
+      type: 'remoteSelect',
+      remoteName: 'code'
     }
   },
-  name: {
+  productName: {
     label: '商品名称',
-    width: 110,
+    width: 180,
     filter: {
       width: 100,
       type: 'input',
@@ -146,12 +162,13 @@ export const formTableColumns = {
       type: 'select'
     },
     tableForm: {
-      type: 'remoteSelect'
+      type: 'remoteSelect',
+      remoteName: 'name'
     }
   },
   unit: {
     label: '单位',
-    width: 110,
+    width: 100,
     type: 'select',
     filter: {
       type: 'select',
@@ -161,18 +178,20 @@ export const formTableColumns = {
       type: 'select'
     },
     tableForm: {
-      type: 'select'
+      type: 'select',
+      remoteName: 'unit'
     },
     relation: 'unit'
   },
-  productNum: {
+  enterNum: {
     label: '数量',
-    width: 150,
+    width: 130,
     filter: {
       type: 'input'
     },
     tableForm: {
-      type: 'number'
+      type: 'number',
+      remoteName: 'productNum'
     },
     form: {
       type: 'input'
@@ -180,20 +199,21 @@ export const formTableColumns = {
   },
   unitPrice: {
     label: '单价',
-    width: 110,
+    width: 130,
     filter: {
       type: 'input'
     },
     tableForm: {
-      type: 'input'
+      type: 'input',
+      remoteName: 'newPrice'
     },
     form: {
       type: 'input'
     }
   },
-  newPrice: {
+  productPrice: {
     label: '金额',
-    width: 110,
+    width: 130,
     filter: {
       type: 'input'
     },

@@ -3,6 +3,7 @@
     ref="formTablepage"
     :formList="formList"
     :tableList="tableList"
+    :tableSubmitList="tableSubmitList"
     :tableData="tableData"
     :columns="columns"
     :values="values"
@@ -21,41 +22,24 @@ export default {
   data () {
     return {
       formList: ['origin', 'storageType', 'enterPrice', 'takePe', 'makePe', 'remark'],
-      tableList: ['code', 'name', 'unit', 'productNum', 'unitPrice', 'newPrice', 'remark'],
+      tableList: ['code', 'productName', 'unit', 'enterNum', 'unitPrice', 'productPrice', 'remark'],
+      tableSubmitList: ['code', 'productId', 'enterNum', 'productPrice', 'remark'],
       columns: formColumns,
       formTableColumns: formTableColumns,
       values: {},
       submitResource: 'enterStock/detail',
       tableData: [{
-        id: 0,
-        productId: 'aaaaa',
-        enterNum: 100,
-        discount: 100,
-        remark: '测试测试'
+        id: 0
       }, {
-        id: 1,
-        productId: 'aaaaa',
-        enterNum: 100,
-        discount: 100,
-        remark: '测试测试'
+        id: 1
       }, {
-        id: 2,
-        productId: 'aaaaa',
-        enterNum: 100,
-        discount: 100,
-        remark: '测试测试'
+        id: 2
       }, {
-        id: 3,
-        productId: 'aaaaa',
-        enterNum: 100,
-        discount: 100,
-        remark: '测试测试'
+        id: 3
       }, {
-        id: 4,
-        productId: 'aaaaa',
-        enterNum: 100,
-        discount: 100,
-        remark: '测试测试'
+        id: 4
+      }, {
+        id: 5
       }],
       productOptions: [],
       loading: false
