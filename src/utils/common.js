@@ -122,3 +122,18 @@ export function rmb (num) {
 export function getCallerName (id, data) {
   return data.stepInstances ? data.stepInstances.find(item => item.stepDefineId === id).callerName : ''
 }
+
+export const getRemoteValues = (values, columns) => {
+  let currentValues = values
+  Object.keys(columns).filter(key => {
+    return columns[key].tableForm
+  }).map(item => {
+    const { remoteName } = columns[item].tableForm
+    if (remoteName) {
+      if (values[remoteName]) {
+        currentValues[item] = values[remoteName] || ''
+      }
+    }
+  })
+  return currentValues
+}
