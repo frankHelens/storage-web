@@ -1,10 +1,9 @@
-<template>
-  <DataTablePage
+<template lang="pug">
+  DataTablePage(
     ref="table"
     mainColumn="name"
     longColumn="num"
     resource="/product"
-    title=""
     label=""
     labelName="name"
     :dialogSize="60"
@@ -15,16 +14,15 @@
     :filterInitList="filterInitList"
     :createList="createList"
     :updateList="updateList"
-    :operation="operation"
     :columns="columns"
-    :selection="true">
-  </DataTablePage>
+    :selection="true"
+    :onRowDblclick="onRowDblclick")
 </template>
 
 <script>
 import DataTablePage from '@/containers/DataTablePage'
 import { toolbarDelete, toolbarCreate } from '@/containers/DataTablePage/toolbar'
-import { operationUpdate, operationDelete } from '@/containers/DataTablePage/operation'
+import { cloneDeep } from 'lodash'
 
 export default {
   name: 'product',
@@ -34,12 +32,18 @@ export default {
   data () {
     return {
       toolbar: [toolbarDelete, toolbarCreate],
-      operation: [operationUpdate, operationDelete],
       tableInitList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark', 'createdAt', 'updatedAt'],
       tableFullList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark', 'createdAt', 'updatedAt'],
       createList: ['code', 'name', 'type', 'unit', 'safeNum', 'price', 'newPrice', 'remark'],
       updateList: ['code', 'name', 'type', 'unit', 'safeNum', 'price', 'newPrice', 'remark'],
       filterInitList: ['code', 'name', 'type', 'createdAt'],
+      onRowDblclick: (data) => {
+        const { table } = this.$refs
+        const labelName = table.labelName ? '【' + data[table.labelName] + '】' : ''
+        table.updateDialogLabel = '编辑' + table.label + labelName
+        table.updateDialogVisible = true
+        table.updateDialogFormValues = cloneDeep(data)
+      },
       columns: {
         code: {
           label: '商品编号',
