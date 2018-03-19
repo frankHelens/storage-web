@@ -8,7 +8,8 @@ export const formColumns = {
       like: true
     },
     form: {
-      type: 'input'
+      type: 'input',
+      size: 8
     },
     sortable: 'custom'
   },
@@ -21,8 +22,8 @@ export const formColumns = {
       like: true
     },
     form: {
-      width: 150,
-      type: 'input'
+      type: 'input',
+      size: 8
     }
   },
   storageType: {
@@ -34,8 +35,8 @@ export const formColumns = {
       type: 'select'
     },
     form: {
-      width: 110,
-      type: 'select'
+      type: 'select',
+      size: 8
     },
     relation: 'storageType',
     sortable: true
@@ -49,8 +50,8 @@ export const formColumns = {
       like: true
     },
     form: {
-      width: 150,
-      type: 'input'
+      type: 'input',
+      size: 8
     }
   },
   makePe: {
@@ -62,8 +63,8 @@ export const formColumns = {
       like: true
     },
     form: {
-      width: 80,
-      type: 'input'
+      type: 'input',
+      size: 8
     }
   },
   enterPrice: {
@@ -73,8 +74,8 @@ export const formColumns = {
       type: 'input'
     },
     form: {
-      width: 120,
-      type: 'input'
+      type: 'input',
+      size: 8
     },
     sortable: true
   },
@@ -88,7 +89,8 @@ export const formColumns = {
       type: 'daterange'
     },
     form: {
-      type: 'date'
+      type: 'date',
+      size: 8
     },
     sortable: 'custom'
   },
@@ -108,10 +110,9 @@ export const formColumns = {
   },
   remark: {
     label: '备注',
-    width: 200,
     form: {
-      width: 300,
-      type: 'input'
+      type: 'input',
+      size: 8
     },
     tableForm: {
       type: 'input'
@@ -192,7 +193,12 @@ export const formTableColumns = {
     tableForm: {
       type: 'number',
       remoteName: 'productNum',
-      isSum: true
+      isSum: true,
+      chains: [{
+        name: 'productPrice',
+        value: 'unitPrice',
+        type: 'multiply'
+      }]
     },
     form: {
       type: 'input'
@@ -207,7 +213,12 @@ export const formTableColumns = {
     tableForm: {
       type: 'input',
       remoteName: 'price',
-      isSum: true
+      isSum: true,
+      chains: [{
+        name: 'productPrice',
+        value: 'enterNum',
+        type: 'multiply'
+      }]
     },
     form: {
       type: 'input'
