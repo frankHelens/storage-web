@@ -2,7 +2,6 @@
   .form-table-main(v-loading="!hasData")
     SmartForm(
       v-if="hasData"
-      inline
       :formList="formList"
       :columns="columnsList"
       :values="formTableData.base"
@@ -168,7 +167,7 @@ export default {
         })
         this.formTableData = {
           base: data.base,
-          tableData
+          tableData: this.setTableData(tableData)
         }
       })
     },
@@ -187,6 +186,7 @@ export default {
         if (this.id) {
           this.getData(this.id)
         } else {
+          this.formTableData.tableData = this.setTableData()
           this.hasData = true
         }
       }).catch(() => {
@@ -207,6 +207,13 @@ export default {
         }
       })
       return columnsList
+    },
+    setTableData (list) {
+      const resList = list || []
+      for (let i = 0; i < (25 - resList.length); i++) {
+        resList.push({})
+      }
+      return resList
     }
   }
 }
