@@ -86,6 +86,19 @@ export default {
           this.$emit('changeValues', this.queryDatas.find(item => val === item[this.name]), this.index)
           this.$emit('input', val)
         }
+        if (this.column.tableForm.chains) {
+          const { chains } = this.column.tableForm
+          chains.map(chain => {
+            this.$emit('changeChain', {
+              name: this.name,
+              value: this.column.tableForm.dataType === 'number' ? Number(val) : val,
+              chain,
+              index: this.index,
+              values: this.values,
+              column: this.column
+            })
+          })
+        }
       }
     }
   },

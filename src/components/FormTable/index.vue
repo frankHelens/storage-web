@@ -24,7 +24,8 @@
           :column="columns[scope.column.property]"
           :values="scope.row"
           :options="columns[scope.column.property].options"
-          @changeValues="changeValues")
+          @changeValues="changeValues"
+          @changeChain="changeChain")
 </template>
 
 <script>
@@ -71,14 +72,12 @@ export default {
     getSummaries ({ columns, data }) {
       const sums = []
       columns.forEach((column, index) => {
-        console.log()
         const { isSum } = this.columns[column.property].tableForm
         if (index === 0) {
           sums[index] = '合计'
           return
         }
         const values = data.map(item => Number(item[column.property]))
-        // if (!values.every(value => isNaN(value))) {
         if (isSum) {
           sums[index] = values.reduce((prev, curr) => {
             const value = Number(curr)
@@ -100,6 +99,19 @@ export default {
         const currentValues = getRemoteValues(values, this.columns)
         this.$set(this.currentData, index, currentValues)
       }
+      this.$emit('changeDatas', this.currentData)
+    },
+    changeChain ({name, value, chain, index, values, column}) { // 数据联动
+      const chainType = {
+        equal: value,
+        multiply: (Number(value) * Number(values[chain.value])).toFixed(2),
+        division: (Number(value) / Number(values[chain.value])).toFixed(2),
+        custom () {
+          return column.tableForm.customFun({name, value, chain, index, values, column})
+        }
+      }
+      values[chain.name] = chainType[chain.type]
+      this.$set(this.currentData, index, values)
       this.$emit('changeDatas', this.currentData)
     }
   }
