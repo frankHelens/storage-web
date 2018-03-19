@@ -53,4 +53,27 @@ export default [{
   icon: '',
   type: 'PAGE',
   noMenu: true
+}, {
+  id: 8,
+  label: '出库管理',
+  parentId: 4,
+  url: '/manage/deliveryStock',
+  icon: '',
+  type: 'PAGE'
+}, {
+  id: 9,
+  label: '出库单',
+  parentId: 8,
+  url: '/manage/deliveryStockDetail',
+  icon: '',
+  type: 'PAGE',
+  noMenu: true
+}, {
+  id: 10,
+  label: '出库单',
+  parentId: 8,
+  url: '/manage/deliveryStockDetail/:id',
+  icon: '',
+  type: 'PAGE',
+  noMenu: true
 }]
