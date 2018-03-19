@@ -8,8 +8,7 @@ export const formColumns = {
       like: true
     },
     form: {
-      type: 'input',
-      size: 6
+      type: 'input'
     },
     sortable: 'custom'
   },
@@ -22,8 +21,8 @@ export const formColumns = {
       like: true
     },
     form: {
-      type: 'input',
-      size: 6
+      width: 150,
+      type: 'input'
     }
   },
   storageType: {
@@ -35,8 +34,8 @@ export const formColumns = {
       type: 'select'
     },
     form: {
-      type: 'select',
-      size: 6
+      width: 110,
+      type: 'select'
     },
     relation: 'storageType',
     sortable: true
@@ -50,8 +49,8 @@ export const formColumns = {
       like: true
     },
     form: {
-      type: 'input',
-      size: 6
+      width: 150,
+      type: 'input'
     }
   },
   makePe: {
@@ -63,8 +62,8 @@ export const formColumns = {
       like: true
     },
     form: {
-      type: 'input',
-      size: 6
+      width: 80,
+      type: 'input'
     }
   },
   enterPrice: {
@@ -74,8 +73,8 @@ export const formColumns = {
       type: 'input'
     },
     form: {
-      type: 'input',
-      size: 6
+      width: 120,
+      type: 'input'
     },
     sortable: true
   },
@@ -111,6 +110,7 @@ export const formColumns = {
     label: '备注',
     width: 200,
     form: {
+      width: 300,
       type: 'input'
     },
     tableForm: {
@@ -152,7 +152,7 @@ export const formTableColumns = {
   },
   productName: {
     label: '商品名称',
-    width: 180,
+    width: 230,
     filter: {
       width: 100,
       type: 'input',
@@ -191,7 +191,8 @@ export const formTableColumns = {
     },
     tableForm: {
       type: 'number',
-      remoteName: 'productNum'
+      remoteName: 'productNum',
+      isSum: true
     },
     form: {
       type: 'input'
@@ -205,7 +206,8 @@ export const formTableColumns = {
     },
     tableForm: {
       type: 'input',
-      remoteName: 'newPrice'
+      remoteName: 'price',
+      isSum: true
     },
     form: {
       type: 'input'
@@ -218,7 +220,8 @@ export const formTableColumns = {
       type: 'input'
     },
     tableForm: {
-      type: 'input'
+      type: 'input',
+      isSum: true
     },
     form: {
       type: 'input'
@@ -227,7 +230,7 @@ export const formTableColumns = {
   },
   remark: {
     label: '备注',
-    width: 200,
+    // width: 200,
     form: {
       type: 'input'
     },
