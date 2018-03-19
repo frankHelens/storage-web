@@ -1,8 +1,10 @@
 <template lang="pug">
   el-table(
-    stripe
     border
     highlight-current-row
+    :show-summary="showSummary"
+    :summary-method="getSummaries"
+    :max-height="tableWrapperHeight"
     :size="size"
     :data="currentData"
     style="width: 100%")
@@ -27,6 +29,7 @@
 
 <script>
 import FormItem from './FormItem'
+import { getRemoteValues } from '@/utils/common'
 
 export default {
   components: {
@@ -48,6 +51,10 @@ export default {
     columns: {
       type: Object,
       default: () => ({})
+    },
+    showSummary: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -55,20 +62,42 @@ export default {
       currentData: this.tableData
     }
   },
+  computed: {
+    tableWrapperHeight () {
+      return document.body.clientHeight - 280
+    }
+  },
   methods: {
+    getSummaries ({ columns, data }) {
+      const sums = []
+      columns.forEach((column, index) => {
+        console.log()
+        const { isSum } = this.columns[column.property].tableForm
+        if (index === 0) {
+          sums[index] = '合计'
+          return
+        }
+        const values = data.map(item => Number(item[column.property]))
+        // if (!values.every(value => isNaN(value))) {
+        if (isSum) {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr)
+            if (!isNaN(value)) {
+              return prev + curr
+            } else {
+              return prev
+            }
+          }, 0)
+          sums[index]
+        } else {
+          sums[index] = ''
+        }
+      })
+      return sums
+    },
     changeValues (values, index) {
       if (values) {
-        let currentValues = values
-        Object.keys(this.columns).filter(key => {
-          return this.columns[key].tableForm
-        }).map(item => {
-          const { remoteName } = this.columns[item].tableForm
-          if (remoteName) {
-            if (values[remoteName]) {
-              currentValues[item] = values[remoteName] || ''
-            }
-          }
-        })
+        const currentValues = getRemoteValues(values, this.columns)
         this.$set(this.currentData, index, currentValues)
       }
       this.$emit('changeDatas', this.currentData)
