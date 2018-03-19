@@ -1,16 +1,19 @@
 <template lang="pug">
-  .form-table-main(v-if="hasData")
+  .form-table-main(v-loading="!hasData")
     SmartForm(
+      v-if="hasData"
       inline
       :formList="formList"
       :columns="columnsList"
-      :values="values"
+      :values="formTableData.base"
       @changeFormValue="changeFormValue")
-    ButtonList(
-      :data="formTableData"
-      :buttonList="formTableButtonList")
+    .toolbar
+      ButtonList(
+        :data="formTableData"
+        :buttonList="formTableButtonList")
     FormTable(
-      :tableData="tableData"
+      v-if="hasData"
+      :tableData="formTableData.tableData"
       :tableList="tableList"
       :columns="formTableColumnsList"
       @changeDatas="changeDatas")
@@ -22,6 +25,7 @@ import FormTable from '@/components/FormTable'
 import { cloneDeep } from 'lodash'
 import { fetch } from '@/utils/api'
 import ButtonList from '@/components/ButtonList'
+import { getRemoteValues } from '@/utils/common'
 
 export default {
   components: {
@@ -30,39 +34,39 @@ export default {
     ButtonList
   },
   props: {
-    tableData: {
+    tableData: { // 表格数据
       type: Array,
       default: () => []
     },
-    tableList: {
+    tableList: { // 表格列
       type: Array,
       default: () => []
     },
-    resource: {
+    resource: { // 请求接口
       type: String,
       default: ''
     },
-    submitResource: {
+    submitResource: { // 提交接口
       type: String,
       default: ''
     },
-    formList: {
+    formList: { // 表格上方的基础列
       type: Array,
       default: () => []
     },
-    tableSubmitList: {
+    tableSubmitList: { // 表格提交的列
       type: Array,
       default: () => []
     },
-    columns: {
+    columns: { // 表格上方的基础字段定义
       type: Object,
       default: () => {}
     },
-    values: {
+    values: { // 表格上方的基础内容值
       type: Object,
       default: () => {}
     },
-    formTableColumns: {
+    formTableColumns: { // 表格的字段定义
       type: Object,
       default: () => {}
     }
@@ -74,6 +78,7 @@ export default {
     const columnsList = cloneDeep(this.columns)
     const formTableColumnsList = cloneDeep(this.formTableColumns)
     return {
+      id: this.$route.params.id,
       relationKeys: this.getRelationKeys({...columnsList, ...formTableColumnsList}),
       columnsList: columnsList,
       formTableColumnsList: formTableColumnsList,
@@ -87,14 +92,14 @@ export default {
         func: (data, {fromTable}) => {
           const { tableSubmitList, submitResource } = fromTable
           const postData = this.setPostData(data, tableSubmitList)
-          fromTable.$post({
+          fromTable.requestData({
             url: submitResource,
             data: postData
           })
           .then(data => {
             if (data) {
               fromTable.$message({
-                message: '添加成功！',
+                message: '操作成功！',
                 type: 'success'
               })
               fromTable.$router.push('/manage/enterStock')
@@ -103,14 +108,29 @@ export default {
         }
       }],
       formTableData: {
-        base: {},
+        base: this.values,
         tableData: this.tableData
       } // 数据列表
     }
   },
   methods: {
-    setPostData (data, submitList) {
+    requestData ({url, data}) {
+      if (this.id) {
+        return this.$put({
+          url: url + '/' + this.id,
+          data: data
+        })
+      } else {
+        return this.$post({
+          url: url,
+          data: data
+        })
+      }
+    },
+    setPostData (data, submitList) { // 设置提交的数据
       const { tableData, base } = data
+      // 删除多余信息
+      delete base.enter_stock_detail
       const filterData = tableData.filter(item => Object.keys(item).length > 1)
       const submitTableData = filterData.map(data => {
         let values = {}
@@ -134,6 +154,24 @@ export default {
       const keys = Object.keys(list)
       return keys.filter(key => list[key].relation).map(key => list[key].relation)
     },
+    getData (id) { // 获取数据
+      this.$get({
+        url: this.resource + '/' + id
+      })
+      .then(data => {
+        this.hasData = true
+        const tableData = cloneDeep(data).tableData.map(item => {
+          return {
+            ...getRemoteValues(item.product, this.formTableColumns),
+            ...item
+          }
+        })
+        this.formTableData = {
+          base: data.base,
+          tableData
+        }
+      })
+    },
     getRelation () { // 获取字典表项
       this.hasData = false
       fetch({
@@ -146,8 +184,11 @@ export default {
         this.setOptions(this.columnsList, data)
         this.setOptions(this.formTableColumnsList, data)
         this.$emit('getRelation', this.columnsList)
-        this.hasData = true
-        // this.getData()
+        if (this.id) {
+          this.getData(this.id)
+        } else {
+          this.hasData = true
+        }
       }).catch(() => {
       })
     },
@@ -170,3 +211,10 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+  .toolbar
+    height: 40px
+  .form-table-main
+    min-height: 600px
+</style>
