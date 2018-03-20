@@ -1,15 +1,15 @@
 <template lang="pug">
   .form-table-main(v-loading="!hasData")
+    .toolbar
+      ButtonList(
+        :data="formTableData"
+        :buttonList="formTableButtonList")
     SmartForm(
       v-if="hasData"
       :formList="formList"
       :columns="columnsList"
       :values="formTableData.base"
       @changeFormValue="changeFormValue")
-    .toolbar
-      ButtonList(
-        :data="formTableData"
-        :buttonList="formTableButtonList")
     FormTable(
       v-if="hasData"
       :tableData="formTableData.tableData"

@@ -44,21 +44,23 @@
     </Col>
     <Col :span="spanRight" class="layout-content-right">
     <div class="layout-header">
-      <Button type="text" @click="toggleClick">
-        <Icon type="navicon" size="32"></Icon>
-      </Button>
+      <div class="header-left">
+        <Button type="text" @click="toggleClick">
+          <Icon type="navicon" size="32"></Icon>
+        </Button>
+        <div class="layout-breadcrumb">
+          <Breadcrumb>
+            <BreadcrumbItem
+              v-for="item in BreadcrumbList"
+              :key="item"
+              replace
+              :href="item.url">{{item.label}}</BreadcrumbItem>
+          </Breadcrumb>
+        </div>
+      </div>
       <div class="header-nav-list">
         <Topbar/>
       </div>
-    </div>
-    <div class="layout-breadcrumb">
-      <Breadcrumb>
-        <BreadcrumbItem
-          v-for="item in BreadcrumbList"
-          :key="item"
-          replace
-          :href="item.url">{{item.label}}</BreadcrumbItem>
-      </Breadcrumb>
     </div>
     <div class="layout-content">
       <div class="layout-content-main">
@@ -172,7 +174,7 @@ $topHeight: 50px
   display: flex
   flex-direction: column
 .layout-breadcrumb
-  padding: 10px 15px 0
+  padding: 15px
 .layout-content
   flex: 1px
   min-height: 200px
@@ -195,6 +197,9 @@ $topHeight: 50px
   height: $topHeight
   background: #fff
   box-shadow: 0 1px 1px rgba(0,0,0,.1)
+.header-left
+  width: 50%
+  display: flex
 .layout-logo-left
   width: 100%
   height: $topHeight

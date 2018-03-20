@@ -113,7 +113,7 @@ export default {
       return [...selection, ...tableList, ...operationList]
     },
     tableWrapperHeight () {
-      return document.body.clientHeight - 250
+      return document.body.clientHeight - 200
     }
   },
   methods: {
