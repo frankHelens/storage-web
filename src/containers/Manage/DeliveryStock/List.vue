@@ -3,7 +3,7 @@
     ref="table"
     mainColumn="name"
     longColumn="num"
-    resource="/enterStock"
+    resource="/deliveryStock"
     title=""
     label=""
     labelName="name"
@@ -26,7 +26,7 @@ import DataTablePage from '@/containers/DataTablePage'
 import columns from './columns'
 
 export default {
-  name: 'enterStock',
+  name: 'deliveryStock',
   components: {
     DataTablePage
   },

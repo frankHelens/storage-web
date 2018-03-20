@@ -28,8 +28,8 @@ export default {
       columns: formColumns,
       formTableColumns: formTableColumns,
       values: {},
-      resource: 'enterStock/detail',
-      submitResource: 'enterStock/detail',
+      resource: 'deliveryStock/detail',
+      submitResource: 'deliveryStock/detail',
       tableData: [],
       productOptions: [],
       loading: false
