@@ -34,11 +34,6 @@ export default {
     infoList: Array,
     formValues: Object,
     columns: Object
-  },
-  data () {
-    return {
-
-    }
   }
 }
 </script>
@@ -50,10 +45,10 @@ $back: 10px
   padding: $back
   cursor: pointer
 .important-wrap
-  font-size: 14px
+  font-size: 13px
   color: #424e67
-  padding: $back + 2px
-  border: 1px solid #ddd
+  // padding: $back + 2px
+  // border: 1px solid #ddd
   .important-info
     .important-info-item
       margin: $back 0;

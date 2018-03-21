@@ -1,5 +1,5 @@
 <template>
-  <div class="text-overflow" v-if="content.length > minLength">
+  <!-- <div class="text-overflow" v-if="content.length > minLength">
     <el-popover
       placement="top-start"
       trigger="hover"
@@ -13,8 +13,8 @@
         </slot>
       </span>
     </el-popover>
-  </div>
-  <div class="text-overflow" v-else>
+  </div> -->
+  <div class="text-overflow">
     <slot :content="content">
     </slot>
   </div>
