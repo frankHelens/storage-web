@@ -36,9 +36,11 @@ import {
   Row,
   Col,
   Checkbox,
-  Upload
+  Upload,
+  Popover
 } from 'element-ui'
 
+Vue.use(Popover)
 Vue.use(Pagination)
 Vue.use(DatePicker)
 Vue.use(Checkbox)
