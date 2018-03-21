@@ -23,7 +23,7 @@
 
 <script>
 import DataTablePage from '@/containers/DataTablePage'
-import columns from './columns'
+import { baseColumns } from './columns'
 
 export default {
   name: 'deliveryStock',
@@ -42,13 +42,13 @@ export default {
         }
       }],
       operation: [],
-      tableInitList: ['createdAt', 'code', 'origin', 'storageType', 'enterPrice', 'takePe', 'makePe', 'remark'],
+      tableInitList: ['createdAt', 'code', 'clientName', 'storageType', 'deliveryPrice', 'clientAddress', 'linkMan', 'linkPhone', 'makePe', 'remark'],
       tableFullList: [],
       createList: [],
       updateList: [],
-      filterInitList: ['code', 'origin', 'createdAt'],
+      filterInitList: ['code', 'clientName', 'createdAt'],
       columns: {
-        ...columns
+        ...baseColumns
       },
       onRowDblclick (row, index) { // 双击事件
         _this.$router.push('/manage/deliveryStockDetail/' + row.id)

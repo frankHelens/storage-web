@@ -1,14 +1,20 @@
-export default {
+export const baseColumns = {
+  nowDate: {
+    label: '日期',
+    size: 7
+  },
   code: {
     label: '订单编号',
     width: 160,
+    size: 10,
     filter: {
-      width: 145,
+      width: 80,
       type: 'input',
       like: true
     },
     form: {
-      type: 'input'
+      type: 'input',
+      size: 8
     },
     sortable: 'custom'
   },
@@ -21,7 +27,8 @@ export default {
       like: true
     },
     form: {
-      type: 'input'
+      type: 'input',
+      size: 8
     }
   },
   storageType: {
@@ -33,7 +40,8 @@ export default {
       type: 'select'
     },
     form: {
-      type: 'select'
+      type: 'select',
+      size: 8
     },
     relation: 'storageType',
     sortable: true
@@ -47,11 +55,13 @@ export default {
       like: true
     },
     form: {
-      type: 'input'
+      type: 'input',
+      size: 8
     }
   },
   makePe: {
     label: '制单人',
+    size: 7,
     width: 110,
     filter: {
       width: 100,
@@ -59,7 +69,8 @@ export default {
       like: true
     },
     form: {
-      type: 'input'
+      type: 'input',
+      size: 8
     }
   },
   enterPrice: {
@@ -69,15 +80,10 @@ export default {
       type: 'input'
     },
     form: {
-      type: 'input'
+      type: 'input',
+      size: 8
     },
     sortable: true
-  },
-  remark: {
-    label: '备注',
-    form: {
-      type: 'textarea'
-    }
   },
   createdAt: {
     width: 110,
@@ -87,6 +93,10 @@ export default {
     filter: {
       width: 100,
       type: 'daterange'
+    },
+    form: {
+      type: 'date',
+      size: 8
     },
     sortable: 'custom'
   },
@@ -99,6 +109,150 @@ export default {
       width: 100,
       type: 'daterange'
     },
+    form: {
+      type: 'date'
+    },
     sortable: 'custom'
+  },
+  remark: {
+    label: '备注',
+    form: {
+      type: 'input',
+      size: 24
+    },
+    tableForm: {
+      type: 'input'
+    }
+  }
+}
+
+export const formTableColumns = {
+  productId: {
+    label: '商品ID',
+    width: 110,
+    filter: {
+      width: 80,
+      type: 'input'
+    },
+    tableForm: {
+      type: 'input',
+      remoteName: 'id'
+    },
+    form: {
+      type: 'select'
+    }
+  },
+  code: {
+    label: '商品编号',
+    width: 180,
+    filter: {
+      width: 80,
+      type: 'input'
+    },
+    form: {
+      type: 'select'
+    },
+    tableForm: {
+      type: 'remoteSelect',
+      remoteName: 'code'
+    }
+  },
+  productName: {
+    label: '商品名称',
+    width: 230,
+    filter: {
+      width: 100,
+      type: 'input',
+      like: true
+    },
+    form: {
+      type: 'select'
+    },
+    tableForm: {
+      type: 'remoteSelect',
+      remoteName: 'name'
+    }
+  },
+  unit: {
+    label: '单位',
+    width: 100,
+    type: 'select',
+    filter: {
+      type: 'select',
+      like: true
+    },
+    form: {
+      type: 'select'
+    },
+    tableForm: {
+      type: 'select',
+      remoteName: 'unit'
+    },
+    relation: 'unit'
+  },
+  enterNum: {
+    label: '数量',
+    width: 130,
+    filter: {
+      type: 'input'
+    },
+    tableForm: {
+      type: 'number',
+      remoteName: 'productNum',
+      isSum: true,
+      chains: [{
+        name: 'productPrice',
+        value: 'unitPrice',
+        type: 'multiply'
+      }]
+    },
+    form: {
+      type: 'input'
+    }
+  },
+  unitPrice: {
+    label: '单价',
+    width: 130,
+    filter: {
+      type: 'input'
+    },
+    tableForm: {
+      type: 'input',
+      remoteName: 'price',
+      isSum: true,
+      chains: [{
+        name: 'productPrice',
+        value: 'enterNum',
+        type: 'multiply'
+      }]
+    },
+    form: {
+      type: 'input'
+    }
+  },
+  productPrice: {
+    label: '金额',
+    width: 130,
+    filter: {
+      type: 'input'
+    },
+    tableForm: {
+      type: 'input',
+      isSum: true
+    },
+    form: {
+      type: 'input'
+    },
+    sortable: true
+  },
+  remark: {
+    label: '备注',
+    // width: 200,
+    form: {
+      type: 'input'
+    },
+    tableForm: {
+      type: 'input'
+    }
   }
 }

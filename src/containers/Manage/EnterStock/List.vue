@@ -23,7 +23,7 @@
 
 <script>
 import DataTablePage from '@/containers/DataTablePage'
-import columns from './columns'
+import { baseColumns } from './columns'
 
 export default {
   name: 'enterStock',
@@ -48,7 +48,7 @@ export default {
       updateList: [],
       filterInitList: ['code', 'origin', 'createdAt'],
       columns: {
-        ...columns
+        ...baseColumns
       },
       onRowDblclick (row, index) { // 双击事件
         _this.$router.push('/manage/enterStockDetail/' + row.id)

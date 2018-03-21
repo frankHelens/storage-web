@@ -31,7 +31,7 @@ export default {
       count: 10,
       productList: [{
         name: 'xx',
-        label: '正宗椰树牌 - 当前库存： 5',
+        label: '猜测测试正宗椰树牌 - 当前库存： 5',
         url: '/query/list'
       }, {
         name: 'xx',

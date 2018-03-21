@@ -92,6 +92,8 @@ export default {
           sums[index] = ''
         }
       })
+      // 获取总金额
+      this.$emit('getSumsPrice', sums[sums.length - 2])
       return sums
     },
     changeValues (values, index) {

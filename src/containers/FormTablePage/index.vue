@@ -4,23 +4,31 @@
       ButtonList(
         :data="formTableData"
         :buttonList="formTableButtonList")
+      slot(name="toolbar")
+        ImportantInfo.important-info(
+          :infoList="toolbarList"
+          :formValues="infoValues"
+          :columns="columnsList")
     SmartForm(
       v-if="hasData"
       :formList="formList"
       :columns="columnsList"
       :values="formTableData.base"
+      :formLabelWidth="80"
       @changeFormValue="changeFormValue")
     FormTable(
       v-if="hasData"
       :tableData="formTableData.tableData"
       :tableList="tableList"
       :columns="formTableColumnsList"
-      @changeDatas="changeDatas")
+      @changeDatas="changeDatas"
+      @getSumsPrice="getSumsPrice")
 </template>
 
 <script>
 import SmartForm from '@/components/SmartForm'
 import FormTable from '@/components/FormTable'
+import ImportantInfo from '@/components/ImportantInfo'
 import { cloneDeep } from 'lodash'
 import { fetch } from '@/utils/api'
 import ButtonList from '@/components/ButtonList'
@@ -30,7 +38,8 @@ export default {
   components: {
     SmartForm,
     FormTable,
-    ButtonList
+    ButtonList,
+    ImportantInfo
   },
   props: {
     tableData: { // 表格数据
@@ -68,6 +77,14 @@ export default {
     formTableColumns: { // 表格的字段定义
       type: Object,
       default: () => {}
+    },
+    toolbarList: {
+      type: Array,
+      default: () => []
+    },
+    toolbarValues: {
+      type: Object,
+      default: () => {}
     }
   },
   created () {
@@ -101,7 +118,7 @@ export default {
                 message: '操作成功！',
                 type: 'success'
               })
-              fromTable.$router.push('/manage/enterStock')
+              fromTable.$router.go(-1)
             }
           })
         }
@@ -109,7 +126,8 @@ export default {
       formTableData: {
         base: this.values,
         tableData: this.tableData
-      } // 数据列表
+      }, // 数据列表
+      infoValues: this.toolbarValues
     }
   },
   methods: {
@@ -139,7 +157,10 @@ export default {
         return values
       })
       return {
-        base,
+        base: {
+          ...base,
+          ...this.infoValues
+        },
         tableData: submitTableData
       }
     },
@@ -168,6 +189,10 @@ export default {
         this.formTableData = {
           base: data.base,
           tableData: this.setTableData(tableData)
+        }
+        this.infoValues = {
+          ...this.infoValues,
+          ...data.base
         }
       })
     },
@@ -214,6 +239,10 @@ export default {
         resList.push({})
       }
       return resList
+    },
+    getSumsPrice (values) { // 业务需求，添加总金额
+      this.infoValues.deliveryPrice = values
+      this.infoValues.enterPrice = values
     }
   }
 }
@@ -222,6 +251,11 @@ export default {
 <style lang="sass" scoped>
   .toolbar
     height: 40px
+    display: flex
+    justify-content: space-between
+    .important-info
+      width: 500px
+      line-height: 32px
   .form-table-main
     min-height: 600px
 </style>

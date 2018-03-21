@@ -7,6 +7,8 @@
     :tableData="tableData"
     :columns="columns"
     :values="values"
+    :toolbarValues="toolbarValues"
+    :toolbarList="toolbarList"
     :resource="resource"
     :submitResource="submitResource"
     :formTableColumns="formTableColumns")
@@ -14,7 +16,7 @@
 
 <script>
 import FormTablePage from '@/containers/FormTablePage'
-import { formColumns, formTableColumns } from '@/containers/Manage/columns'
+import { baseColumns, formTableColumns } from './columns'
 
 export default {
   components: {
@@ -22,10 +24,16 @@ export default {
   },
   data () {
     return {
-      formList: ['origin', 'storageType', 'enterPrice', 'takePe', 'makePe', 'remark'],
+      formList: ['origin', 'storageType', 'takePe', 'remark'],
       tableList: ['code', 'productName', 'unit', 'enterNum', 'unitPrice', 'productPrice', 'remark'],
       tableSubmitList: ['code', 'productId', 'enterNum', 'unitPrice', 'productPrice', 'remark'],
-      columns: formColumns,
+      toolbarList: ['makePe', 'nowDate', 'code'],
+      toolbarValues: {
+        nowDate: this.$moment().format('YYYY-MM-DD'),
+        makePe: '黄小小',
+        code: ''
+      },
+      columns: baseColumns,
       formTableColumns: formTableColumns,
       values: {},
       resource: 'enterStock/detail',

@@ -32,10 +32,11 @@ export default {
   data () {
     return {
       toolbar: [toolbarDelete, toolbarCreate],
-      tableInitList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark', 'createdAt', 'updatedAt'],
-      tableFullList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'storeNum', 'totalNum', 'price', 'newPrice', 'remark', 'createdAt', 'updatedAt'],
-      createList: ['code', 'name', 'type', 'unit', 'safeNum', 'price', 'newPrice', 'remark'],
-      updateList: ['code', 'name', 'type', 'unit', 'safeNum', 'price', 'newPrice', 'remark'],
+      // , 'storeNum', 'totalNum'
+      tableInitList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'price', 'newPrice', 'remark', 'createdAt', 'updatedAt'],
+      tableFullList: ['code', 'name', 'type', 'unit', 'safeNum', 'productNum', 'price', 'newPrice', 'remark', 'createdAt', 'updatedAt'],
+      createList: ['code', 'name', 'type', 'unit', 'safeNum', 'price', 'remark'],
+      updateList: ['code', 'name', 'type', 'unit', 'safeNum', 'price', 'remark'],
       filterInitList: ['code', 'name', 'type', 'createdAt'],
       onRowDblclick: (data) => {
         const { table } = this.$refs
@@ -109,7 +110,8 @@ export default {
           sortable: 'custom'
         },
         productNum: {
-          label: '仓库库存',
+          // label: '仓库库存',
+          label: '库存数量',
           width: 110,
           filter: {
             type: 'input'
