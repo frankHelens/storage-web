@@ -3,7 +3,7 @@
     <Dropdown
       trigger="click"
       @on-click="changeTopValue">
-      <Badge :count="count">
+      <Badge :count="productList.length">
         <Icon type="ios-bell-outline" size="25"></Icon>
       </Badge>
       <span class="top-title">{{title}}</span>
@@ -25,27 +25,24 @@ export default {
   name: 'TopMenuItem',
   props: {
   },
+  created () {
+    this.$get({
+      url: '/product/safe'
+    })
+    .then(data => {
+      this.productList = data.map(item => {
+        const { code, productNum, name } = item
+        return {
+          label: code + '-' + name + '：' + productNum
+        }
+      })
+    })
+  },
   data () {
     return {
       title: '安全库存',
-      count: 10,
-      productList: [{
-        name: 'xx',
-        label: '猜测测试正宗椰树牌 - 当前库存： 5',
-        url: '/query/list'
-      }, {
-        name: 'xx',
-        label: '正宗椰树牌 - 当前库存： 10',
-        url: '/query/list'
-      }, {
-        name: 'xx',
-        label: '正宗椰树牌 - 当前库存： 15',
-        url: '/query/list'
-      }, {
-        name: 'xx',
-        label: '正宗椰树牌 - 当前库存： 20',
-        url: '/query/list'
-      }]
+      count: 0,
+      productList: []
     }
   },
   methods: {

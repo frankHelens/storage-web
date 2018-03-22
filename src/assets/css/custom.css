@@ -220,3 +220,8 @@ body{
 .ivu-menu-item{
   border-bottom: 1px solid #323237;
 }
+
+.ivu-dropdown .ivu-select-dropdown {
+  overflow: auto;
+  max-height: 350px;
+}
