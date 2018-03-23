@@ -79,18 +79,19 @@ export const pathRedirect = (to) => {
 
 export const getAccount = (callback) => {
   if (!localStorage.realName) {
-    // fetch({
-    //   method: 'get',
-    //   url: 'rbac/user/get'
-    // }).then(response => {
-    //   localStorage.userId = response.id
-    //   localStorage.realname = response.name
-    //   localStorage.paths = JSON.stringify(pathFormat(response.menus.filter(item => item.type !== 'BUTTON')))
+    fetch({
+      method: 'get',
+      url: 'user/get'
+    }).then(response => {
+      console.log(response)
+      localStorage.userId = response.id
+      localStorage.realname = response.name
+      // localStorage.paths = JSON.stringify(pathFormat(response.menus.filter(item => item.type !== 'BUTTON')))
       // localStorage.actions = response.menus.filter(item => item.type === 'BUTTON').map(item => {
       //   return item.url
       // })
-    //   callback(response)
-    // })
+      callback(response)
+    })
     localStorage.realname = '系统管理员'
     localStorage.paths = JSON.stringify(pathFormat(menus.filter(item => item.type !== 'BUTTON')))
     localStorage.actions = menus.filter(item => item.type === 'BUTTON').map(item => {

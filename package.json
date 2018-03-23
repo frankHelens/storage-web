@@ -1,8 +1,8 @@
 {
   "name": "WWIS",
   "version": "1.0.0",
-  "subversion": 17,
-  "title": "前端测试",
+  "subversion": 18,
+  "title": "仓库管理系统",
   "description": "A Vue.js project",
   "author": "黄丰瑞 <798356548@qq.com>",
   "private": true,

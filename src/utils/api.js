@@ -10,7 +10,7 @@ import { URL, API } from './common'
 import router from '@/router'
 
 axios.defaults.baseURL = URL + API
-axios.defaults.headers.common['Gddx-Access-AppId'] = 'web'
+axios.defaults.headers.common['Frank-Access-AppId'] = 'web'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.headers.delete['Content-Type'] = 'application/json'
 
@@ -20,20 +20,20 @@ function signFormat (props) {
 
 export function httpHeader (props, timeStamp) {
   let sign = {
-    'Gddx-Access-Token': localStorage.token,
-    'Gddx-Access-Version': '0.1.0'
+    'Frank-Access-Token': localStorage.token,
+    'Frank-Access-Version': '0.1.0'
   }
   return {
     ...props.headers,
-    'Gddx-Access-Sign': signFormat({
+    'Frank-Access-Sign': signFormat({
       ...sign,
       ...props.params,
       ...props.data,
-      'Gddx-Access-TimeStamp': timeStamp
+      'Frank-Access-TimeStamp': timeStamp
     }),
-    'Gddx-Access-TimeStamp': timeStamp,
-    'Gddx-Access-Token': sign['Gddx-Access-Token'],
-    'Gddx-Access-Version': sign['Gddx-Access-Version']
+    'Frank-Access-TimeStamp': timeStamp,
+    'Frank-Access-Token': sign['Frank-Access-Token'],
+    'Frank-Access-Version': sign['Frank-Access-Version']
   }
 }
 
