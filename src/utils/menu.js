@@ -1,17 +1,17 @@
 export default [{
-//   id: 0,
-//   label: '系统管理',
-//   url: '/manager',
-//   icon: 'gear-b',
-//   type: 'MODULE'
-// }, {
-//   id: 1,
-//   parentId: 0,
-//   label: '用户管理',
-//   url: '/manager/account',
-//   icon: '',
-//   type: 'PAGE'
-// }, {
+  id: 0,
+  label: '系统管理',
+  url: '',
+  icon: 'gear-b',
+  type: 'MODULE'
+}, {
+  id: 1,
+  parentId: 0,
+  label: '用户管理',
+  url: '/system/account',
+  icon: '',
+  type: 'PAGE'
+}, {
   id: 2,
   label: '基础信息',
   url: '',
@@ -73,6 +73,14 @@ export default [{
   label: '出库单',
   parentId: 8,
   url: '/manage/deliveryStockDetail/:id',
+  icon: '',
+  type: 'PAGE',
+  noMenu: true
+}, {
+  id: 11,
+  parentId: 0,
+  label: '修改密码',
+  url: '/system/changePassword',
   icon: '',
   type: 'PAGE',
   noMenu: true

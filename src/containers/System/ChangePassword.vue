@@ -41,8 +41,7 @@ export default {
         func: (values) => {
           fetch({
             method: 'put',
-            url: 'rbac/user/changePassword',
-            // meterms-st/rbac/user/changePassword
+            url: 'changePassword',
             data: {
               oldPassword: values.oldpassword,
               newPassword: values.newpassword

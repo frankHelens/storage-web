@@ -1,15 +1,23 @@
 import VueRouter from 'vue-router'
 
-import { logout } from '@/utils/auth'
+import { logout, loggedIn } from '@/utils/auth'
 import Home from '@/containers/Home'
 import Login from '@/containers/Login'
 import NotFound from '@/containers/Common/NotFound'
 import baseRoutes from './base'
 import manageRoutes from './manage'
 import Test from '@/containers/Test'
+import systemRoutes from './system'
 
 function requireAuth (to, from, next) {
-  next()
+  if (!loggedIn()) {
+    next({
+      path: '/login'
+      // query: { redirect: to.fullPath }
+    })
+  } else {
+    next()
+  }
 }
 
 const routes = [
@@ -17,7 +25,8 @@ const routes = [
     component: Home,
     children: [
       baseRoutes,
-      manageRoutes
+      manageRoutes,
+      systemRoutes
     ],
     redirect: '/base/product',
     beforeEnter: requireAuth

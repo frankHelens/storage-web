@@ -14,6 +14,8 @@
   </Dropdown>
 </template>
 <script>
+import { logout } from '@/utils/auth'
+
 export default {
   data () {
     return {
@@ -29,12 +31,23 @@ export default {
   },
   methods: {
     changeTopValue (name) {
-      if (name === 'password') {
-        console.log(name)
+      const _this = this
+      const changeType = {
+        password () {
+          _this.$router.replace('/system/changePassword')
+        },
+        logout () {
+          logout(() => {
+            _this.$message({
+              message: '退出成功',
+              showClose: true,
+              type: 'success'
+            })
+            _this.$router.replace('/login')
+          })
+        }
       }
-      if (name === 'logout') {
-        console.log(name)
-      }
+      changeType[name]()
     }
   }
 }
