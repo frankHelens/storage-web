@@ -225,3 +225,20 @@ body{
   overflow: auto;
   max-height: 350px;
 }
+/* 
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset !important;
+} */
+
+.login-wrapper .el-input__inner {
+  background: transparent !important;
+  color: #fff;
+}
+
+.login-wrapper .el-form-item__label{
+  color: #fff;
+}
+
+.login-wrapper .el-button{
+  width: 100% !important;
+}
