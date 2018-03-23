@@ -6,7 +6,7 @@ import menus from './menu'
 
 export function login (username, password, callback) {
   fetch({
-    method: 'post',
+    method: 'put',
     url: 'login',
     data: {
       loginPassword: encrypt(password),
