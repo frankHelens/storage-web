@@ -5,6 +5,7 @@
     longColumn="num"
     resource="user"
     labelName="name"
+    label="用户"
     :dialogSize="40"
     :relation="false"
     :toolbar="toolbar"    
