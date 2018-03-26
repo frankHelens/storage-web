@@ -1,5 +1,6 @@
 import Account from '@/containers/System/Account'
 import ChangePassword from '@/containers/System/ChangePassword'
+import Menu from '@/containers/System/Menu'
 
 export default {
   path: 'system',
@@ -8,6 +9,7 @@ export default {
   },
   children: [
     { path: 'account', component: Account },
-    { path: 'changePassword', component: ChangePassword }
+    { path: 'changePassword', component: ChangePassword },
+    { path: 'menu', component: Menu }
   ]
 }

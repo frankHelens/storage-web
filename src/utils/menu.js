@@ -84,4 +84,19 @@ export default [{
   icon: '',
   type: 'PAGE',
   noMenu: true
+}, {
+  id: 12,
+  parentId: 2,
+  label: '安全库存列表',
+  url: '/base/safeList',
+  icon: '',
+  type: 'PAGE',
+  noMenu: true
+}, {
+  id: 13,
+  parentId: 0,
+  label: '菜单管理',
+  url: '/system/menu',
+  icon: '',
+  type: 'PAGE'
 }]
