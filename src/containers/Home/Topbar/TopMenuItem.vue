@@ -3,7 +3,7 @@
     <Dropdown
       trigger="click"
       @on-click="changeTopValue">
-      <Badge :count="productList.length">
+      <Badge :count="productList.length - 1">
         <Icon type="ios-bell-outline" size="25"></Icon>
       </Badge>
       <span class="top-title">{{title}}</span>
@@ -30,12 +30,16 @@ export default {
       url: '/product/safe'
     })
     .then(data => {
-      this.productList = data.map(item => {
+      const dataList = data.data.map(item => {
         const { code, productNum, name } = item
         return {
           label: code + '-' + name + '：' + productNum
         }
       })
+      this.productList = [{
+        label: '全部',
+        url: '/base/safeList'
+      }, ...dataList]
     })
   },
   data () {
@@ -47,6 +51,7 @@ export default {
   },
   methods: {
     changeTopValue (url) {
+      console.log(url)
       this.$router.push(url)
     }
   }
