@@ -11,7 +11,8 @@
     :toolbarList="toolbarList"
     :resource="resource"
     :submitResource="submitResource"
-    :formTableColumns="formTableColumns")
+    :formTableColumns="formTableColumns"
+    :formTableValues="formTableValues")
 </template>
 
 <script>
@@ -40,7 +41,10 @@ export default {
       submitResource: 'enterStock/detail',
       tableData: [],
       productOptions: [],
-      loading: false
+      loading: false,
+      formTableValues: {
+        unitPrice: 1
+      }
     }
   }
 }

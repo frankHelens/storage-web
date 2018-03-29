@@ -39,7 +39,7 @@ export default {
     width: 100,
     sort: true,
     type: 'select',
-    // relation: 'enabled',
+    relation: 'enabled',
     filter: {
       type: 'select',
       width: 100
@@ -98,5 +98,58 @@ export default {
     form: {
       type: 'textarea'
     }
+  },
+  parentId: {
+    label: '上级菜单',
+    type: 'select',
+    form: {
+      type: 'select'
+    },
+    relation: 'menuId'
+  },
+  label: {
+    label: '菜单名称',
+    form: {
+      type: 'input'
+    },
+    filter: {
+      width: 100,
+      type: 'input',
+      like: true
+    }
+  },
+  url: {
+    label: '路径',
+    form: {
+      type: 'input'
+    }
+  },
+  icon: {
+    label: '图标',
+    form: {
+      type: 'input'
+    }
+  },
+  type: {
+    label: '类型',
+    type: 'select',
+    form: {
+      type: 'select'
+    },
+    options: [{
+      label: '模块',
+      value: 'MODULE'
+    }, {
+      label: '页面',
+      value: 'Page'
+    }]
+  },
+  noMenu: {
+    label: '显示菜单',
+    type: 'select',
+    form: {
+      type: 'select'
+    },
+    relation: 'noMenu'
   }
 }

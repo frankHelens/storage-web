@@ -198,7 +198,7 @@ export const formTableColumns = {
     },
     tableForm: {
       type: 'number',
-      remoteName: 'productNum',
+      // remoteName: 'productNum',
       isSum: true,
       chains: [{
         name: 'productPrice',
@@ -218,7 +218,7 @@ export const formTableColumns = {
     },
     tableForm: {
       type: 'input',
-      remoteName: 'price',
+      // remoteName: 'price',
       isSum: true,
       chains: [{
         name: 'productPrice',

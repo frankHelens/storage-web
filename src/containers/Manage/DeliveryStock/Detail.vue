@@ -11,7 +11,8 @@
     :toolbarList="toolbarList"
     :resource="resource"
     :submitResource="submitResource"
-    :formTableColumns="formTableColumns")
+    :formTableColumns="formTableColumns"
+    :formTableButtons="formTableButtons")
 </template>
 
 <script>
@@ -40,7 +41,14 @@ export default {
       submitResource: 'deliveryStock/detail',
       tableData: [],
       productOptions: [],
-      loading: false
+      loading: false,
+      formTableButtons: [{
+        name: 'print',
+        label: '打印',
+        func: (data, props) => {
+          console.log(data, props)
+        }
+      }]
     }
   }
 }

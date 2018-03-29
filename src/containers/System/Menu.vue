@@ -1,12 +1,12 @@
 <template>
   <DataTablePage
     ref="table"
-    mainColumn="name"
-    longColumn="num"
+    mainColumn="label"
+    longColumn="label"
     resource="menu"
-    labelName="name"
+    labelName="label"
     label="菜单"
-    :dialogSize="40"
+    :dialogSize="60"
     :relation="false"
     :toolbar="toolbar"    
     :tableInitList="tableInitList"
@@ -15,6 +15,7 @@
     :updateList="updateList"
     :columns="columns"
     :selection="true"
+    :relationResource="relationResource"
     :onRowDblclick="onRowDblclick">
   </DataTablePage>
 </template>
@@ -32,6 +33,7 @@ export default {
   },
   data () {
     return {
+      relationResource: 'menu/relation',
       toolbar: [toolbarDelete, toolbarCreate],
       onRowDblclick: (data) => {
         const { table } = this.$refs
@@ -40,10 +42,10 @@ export default {
         table.updateDialogVisible = true
         table.updateDialogFormValues = cloneDeep(data)
       },
-      tableInitList: ['loginName', 'name', 'linkPhone', 'createdAt', 'updatedAt', 'remark'],
-      createList: ['loginName', 'loginPassword', 'name', 'linkPhone', 'remark'],
-      updateList: ['loginName', 'name', 'linkPhone', 'remark'],
-      filterInitList: ['name', 'linkPhone', 'createdAt'],
+      tableInitList: ['label', 'parentId', 'url', 'icon', 'type', 'noMenu', 'enabled', 'remark'],
+      createList: ['label', 'parentId', 'url', 'icon', 'type', 'noMenu', 'enabled', 'remark'],
+      updateList: ['label', 'parentId', 'url', 'icon', 'type', 'noMenu', 'enabled', 'remark'],
+      filterInitList: ['label'],
       columns: columns
     }
   }

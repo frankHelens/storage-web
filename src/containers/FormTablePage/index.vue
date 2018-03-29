@@ -68,15 +68,15 @@ export default {
     },
     columns: { // 表格上方的基础字段定义
       type: Object,
-      default: () => {}
+      default: () => ({})
     },
     values: { // 表格上方的基础内容值
       type: Object,
-      default: () => {}
+      default: () => ({})
     },
     formTableColumns: { // 表格的字段定义
       type: Object,
-      default: () => {}
+      default: () => ({})
     },
     toolbarList: {
       type: Array,
@@ -84,45 +84,39 @@ export default {
     },
     toolbarValues: {
       type: Object,
-      default: () => {}
+      default: () => ({})
+    },
+    formTableButtons: {
+      type: Array,
+      default: () => []
+    },
+    formTableValues: {
+      type: Object,
+      default: () => ({})
     }
   },
   created () {
     this.getRelation()
   },
+  watch: {
+    $route (to) {
+      const { id } = to.params
+      if (id) {
+        this.id = id
+        this.getData(id)
+      }
+    }
+  },
   data () {
     const columnsList = cloneDeep(this.columns)
     const formTableColumnsList = cloneDeep(this.formTableColumns)
+    // 判断是否显示
     return {
       id: this.$route.params.id,
       relationKeys: this.getRelationKeys({...columnsList, ...formTableColumnsList}),
       columnsList: columnsList,
       formTableColumnsList: formTableColumnsList,
       hasData: false,
-      formTableButtonList: [{ // 提交
-        name: 'formtableSubmit',
-        label: '提交',
-        funcProps: {
-          fromTable: this
-        },
-        func: (data, {fromTable}) => {
-          const { tableSubmitList, submitResource } = fromTable
-          const postData = this.setPostData(data, tableSubmitList)
-          fromTable.requestData({
-            url: submitResource,
-            data: postData
-          })
-          .then(data => {
-            if (data) {
-              fromTable.$message({
-                message: '操作成功！',
-                type: 'success'
-              })
-              fromTable.$router.go(-1)
-            }
-          })
-        }
-      }],
       formTableData: {
         base: this.values,
         tableData: this.tableData
@@ -130,8 +124,42 @@ export default {
       infoValues: this.toolbarValues
     }
   },
+  computed: {
+    formTableButtonList () {
+      const customFormTableButtonList = this.$route.params.id ? this.formTableButtons : []
+      return [{ // 提交
+        name: 'formtableSubmit',
+        label: '保存',
+        funcProps: {
+          formTable: this
+        },
+        func: (data, {formTable}) => {
+          const { tableSubmitList, submitResource } = formTable
+          const postData = this.setPostData(data, tableSubmitList)
+          formTable.requestData({
+            url: submitResource,
+            data: postData
+          })
+          .then(data => {
+            if (data) {
+              formTable.$message({
+                message: '操作成功！',
+                type: 'success'
+              })
+              const { path, params } = formTable.$route
+              if (params.id) {
+                this.getRelation()
+              } else {
+                formTable.$router.push(path + '/' + data)
+              }
+            }
+          })
+        }
+      }, ...customFormTableButtonList]
+    }
+  },
   methods: {
-    requestData ({url, data}) {
+    requestData ({url, data}) { // 请求接口
       if (this.id) {
         return this.$put({
           url: url + '/' + this.id,
@@ -148,7 +176,9 @@ export default {
       const { tableData, base } = data
       // 删除多余信息
       delete base.enter_stock_detail
-      const filterData = tableData.filter(item => Object.keys(item).length > 1)
+      const filterData = tableData.filter(item => {
+        return item.code || item.productName
+      })
       const submitTableData = filterData.map(data => {
         let values = {}
         submitList.map(item => {
@@ -158,8 +188,8 @@ export default {
       })
       return {
         base: {
-          ...base,
-          ...this.infoValues
+          ...this.infoValues,
+          ...base
         },
         tableData: submitTableData
       }
@@ -236,7 +266,7 @@ export default {
     setTableData (list) {
       const resList = list || []
       for (let i = 0; i < (25 - resList.length); i++) {
-        resList.push({})
+        resList.push(this.formTableValues)
       }
       return resList
     },

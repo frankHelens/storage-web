@@ -138,7 +138,7 @@ export default {
     //   type: Boolean,
     //   default: false
     // }, /* 是否有关联数据接口 */
-    // relationResource: String,
+    relationResource: String,
     title: {
       type: String,
       default: ''
@@ -449,7 +449,7 @@ export default {
     getRelation (value) {
       this.isLoading = true
       fetch({
-        url: 'relation',
+        url: this.relationResource || 'relation',
         params: {
           relationList: this.relationKeys.join(',')
         }

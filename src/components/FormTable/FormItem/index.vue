@@ -78,7 +78,8 @@ export default {
         if (this.type === 'remoteSelect') {
           const { remoteName } = this.column.tableForm
           if (val !== '') {
-            this.$emit('changeValues', this.queryDatas.find(item => val === item[remoteName]), this.index)
+            const value = this.queryDatas.find(item => val === item[remoteName])
+            this.$emit('changeValues', {...this.values, ...value}, this.index)
           } else {
             this.$emit('changeValues', {}, this.index)
           }
