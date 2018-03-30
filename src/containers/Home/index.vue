@@ -3,6 +3,7 @@
     <Row type="flex">
       <Col :span="spanLeft" class="layout-menu-left">
       <Menu
+        v-if="hasDone"
         :active-name="activeName"
         :open-names="openNames"
         theme="dark"
@@ -22,22 +23,23 @@
               <Icon :type="nav.icon" :size="iconSize"></Icon>
               <span class="layout-text">{{nav.label}}</span>
             </template>
-            <MenuItem
+            <menu-item
               v-for="navItem in nav.children"
               :key="navItem"
-              :name="navItem.id">{{navItem.label}}</MenuItem>
+              :name="navItem.id">
+              {{navItem.label}} </menu-item>
           </Submenu>
-          <MenuItem
+          <menu-item
             v-else
             :name="nav.id">
             <Icon :type="nav.icon" :size="iconSize"></Icon>
             <span class="layout-text">{{nav.label}}</span>
-          </MenuItem>
+          </menu-item>
           <div v-show="isClose">
-            <MenuItem :name="nav.id">
+            <menu-item :name="nav.id">
               <Icon :type="nav.icon" :size="iconSize"></Icon>
               <span class="layout-text">{{nav.label}}</span>
-            </MenuItem>  
+            </menu-item>  
           </div>
         </div>
       </Menu>
@@ -59,7 +61,9 @@
         </div>
       </div>
       <div class="header-nav-list">
-        <Topbar/>
+        <Topbar
+          :realName="realName"
+        />
       </div>
     </div>
     <div class="layout-content">
@@ -74,8 +78,9 @@
 <script>
 import { treeFormat, TITLE } from '@/utils/common'
 import Topbar from './Topbar'
-import { cloneDeep } from 'lodash'
+// import { cloneDeep } from 'lodash'
 import menus from '@/utils/menu'
+import { getAccount } from '@/utils/auth'
 
 export default {
   components: {
@@ -88,14 +93,9 @@ export default {
       spanLeft: 12,
       spanRight: 12,
       routesPure: menus,
-      realName: 'Admin',
-      data: {
-        'id': 1,
-        'loginName': 'sa',
-        'name': 'Admin',
-        'menus': []
-      },
-      BreadcrumbList: []
+      realName: '',
+      BreadcrumbList: [],
+      hasDone: false
     }
   },
   watch: {
@@ -106,6 +106,12 @@ export default {
     }
   },
   created () {
+    this.hasDone = false
+    getAccount((response) => {
+      this.realName = response.realName
+      this.routesPure = response.menus
+      this.hasDone = true
+    })
     const { matched } = this.$route
     const { path } = matched[matched.length - 1]
     this.getBreadcrumbList(path)
@@ -122,7 +128,7 @@ export default {
       return this.isClose ? 24 : 19
     },
     navlist () {
-      const navList = cloneDeep(this.routesPure).filter(item => !item.noMenu)
+      const navList = this.routesPure.filter(item => item.noMenu === '0')
       return treeFormat(navList, 'id', 'parentId')
     }
   },
