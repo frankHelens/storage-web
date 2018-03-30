@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { login } from '@/utils/auth'
+import { login, getAccount } from '@/utils/auth'
 
 export default {
   name: 'login',
@@ -45,12 +45,14 @@ export default {
   methods: {
     login () {
       login(this.form.username, this.form.password, () => {
+        getAccount(response => {
+          this.$router.replace(this.$route.query.redirect || '/')
+        })
         this.$message({
           message: '登录成功',
           showClose: true,
           type: 'success'
         })
-        this.$router.replace(this.$route.query.redirect || '/')
       })
     }
   }

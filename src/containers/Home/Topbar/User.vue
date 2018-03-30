@@ -17,9 +17,14 @@
 import { logout } from '@/utils/auth'
 
 export default {
+  props: {
+    realName: {
+      type: String,
+      default: ''
+    }
+  },
   data () {
     return {
-      userName: '超级管理员',
       userList: [{
         name: 'password',
         label: '修改密码'
@@ -27,6 +32,11 @@ export default {
         name: 'logout',
         label: '退出登陆'
       }]
+    }
+  },
+  computed: {
+    userName () {
+      return this.realName
     }
   },
   methods: {

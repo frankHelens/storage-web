@@ -1,7 +1,7 @@
 <template>
   <div class="top-container">
     <TopMenuItem/>
-    <User/>
+    <User :realName="realName"/>
   </div>
 </template>
 <script>
