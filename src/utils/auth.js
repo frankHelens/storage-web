@@ -2,7 +2,6 @@
 
 import { fetch } from './api'
 import { encrypt } from './common'
-import menus from './menu'
 
 export function login (username, password, callback) {
   fetch({
@@ -25,12 +24,9 @@ export function setCurrentPage (page) {
 export function getCurrentPage (page) {
   return localStorage.currentPage
 }
-export function getToken () {
-  return localStorage.token
-}
-export function getRealname () {
-  return localStorage.realname
-}
+export const token = localStorage.token
+export const realname = localStorage.realname
+
 export function logout (callback) {
   delete localStorage.token
   if (callback) callback()
@@ -81,22 +77,21 @@ export const getAccount = (callback) => {
   if (!localStorage.realName) {
     fetch({
       method: 'get',
-      url: 'user/get'
+      url: 'rbac'
     }).then(response => {
-      console.log(response)
       localStorage.userId = response.id
       localStorage.realname = response.name
-      // localStorage.paths = JSON.stringify(pathFormat(response.menus.filter(item => item.type !== 'BUTTON')))
-      // localStorage.actions = response.menus.filter(item => item.type === 'BUTTON').map(item => {
-      //   return item.url
-      // })
+      localStorage.paths = JSON.stringify(pathFormat(response.menus.filter(item => item.type !== 'BUTTON')))
+      localStorage.actions = response.menus.filter(item => item.type === 'BUTTON').map(item => {
+        return item.url
+      })
+      localStorage.realname = response.realname
       callback(response)
     })
-    localStorage.realname = '系统管理员'
-    localStorage.paths = JSON.stringify(pathFormat(menus.filter(item => item.type !== 'BUTTON')))
-    localStorage.actions = menus.filter(item => item.type === 'BUTTON').map(item => {
-      return item.url
-    })
+    // localStorage.paths = JSON.stringify(pathFormat(menus.filter(item => item.type !== 'BUTTON')))
+    // localStorage.actions = menus.filter(item => item.type === 'BUTTON').map(item => {
+    //   return item.url
+    // })
   }
 } // 输入父模块路径，自动计算拥有的权限的子模块路径
 
