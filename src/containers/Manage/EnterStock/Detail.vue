@@ -19,6 +19,7 @@
 import FormTablePage from '@/containers/FormTablePage'
 import { baseColumns, formTableColumns } from './columns'
 
+/* globals localStorage */
 export default {
   components: {
     FormTablePage
@@ -31,7 +32,7 @@ export default {
       toolbarList: ['makePe', 'nowDate', 'code'],
       toolbarValues: {
         nowDate: this.$moment().format('YYYY-MM-DD'),
-        makePe: '黄小小',
+        makePe: localStorage.realName,
         code: ''
       },
       columns: baseColumns,

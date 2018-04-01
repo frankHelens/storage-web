@@ -25,10 +25,11 @@ export function getCurrentPage (page) {
   return localStorage.currentPage
 }
 export const token = localStorage.token
-export const realname = localStorage.realname
+export const realName = localStorage.realName
 
 export function logout (callback) {
-  delete localStorage.token
+  // delete localStorage.token
+  localStorage.clear()
   if (callback) callback()
 }
 export function loggedIn () {
@@ -74,25 +75,38 @@ export const pathRedirect = (to) => {
 } // 输入父模块路径，自动计算拥有的权限的子模块路径
 
 export const getAccount = (callback) => {
-  if (!localStorage.realName) {
-    fetch({
-      method: 'get',
-      url: 'rbac'
-    }).then(response => {
-      localStorage.userId = response.id
-      localStorage.realname = response.name
-      localStorage.paths = JSON.stringify(pathFormat(response.menus.filter(item => item.type !== 'BUTTON')))
-      localStorage.actions = response.menus.filter(item => item.type === 'BUTTON').map(item => {
-        return item.url
-      })
-      localStorage.realname = response.realname
-      callback(response)
+  fetch({
+    method: 'get',
+    url: 'rbac'
+  }).then(response => {
+    localStorage.userId = response.userId
+    localStorage.realName = response.realName
+    localStorage.paths = JSON.stringify(pathFormat(response.menus.filter(item => item.type !== 'BUTTON')))
+    localStorage.actions = response.menus.filter(item => item.type === 'BUTTON').map(item => {
+      return item.url
     })
-    // localStorage.paths = JSON.stringify(pathFormat(menus.filter(item => item.type !== 'BUTTON')))
-    // localStorage.actions = menus.filter(item => item.type === 'BUTTON').map(item => {
-    //   return item.url
-    // })
-  }
+    localStorage.realName = response.realName
+    callback(response)
+  })
+  // if (!localStorage.realName) {
+  //   fetch({
+  //     method: 'get',
+  //     url: 'rbac'
+  //   }).then(response => {
+  //     localStorage.userId = response.id
+  //     localStorage.realName = response.name
+  //     localStorage.paths = JSON.stringify(pathFormat(response.menus.filter(item => item.type !== 'BUTTON')))
+  //     localStorage.actions = response.menus.filter(item => item.type === 'BUTTON').map(item => {
+  //       return item.url
+  //     })
+  //     localStorage.realName = response.realName
+  //     callback(response)
+  //   })
+  //   // localStorage.paths = JSON.stringify(pathFormat(menus.filter(item => item.type !== 'BUTTON')))
+  //   // localStorage.actions = menus.filter(item => item.type === 'BUTTON').map(item => {
+  //   //   return item.url
+  //   // })
+  // }
 } // 输入父模块路径，自动计算拥有的权限的子模块路径
 
 export function setCurrentNav (nav) {
