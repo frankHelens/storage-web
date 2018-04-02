@@ -11,8 +11,7 @@
     :toolbarList="toolbarList"
     :resource="resource"
     :submitResource="submitResource"
-    :formTableColumns="formTableColumns"
-    :formTableValues="formTableValues")
+    :formTableColumns="formTableColumns")
 </template>
 
 <script>
@@ -27,8 +26,8 @@ export default {
   data () {
     return {
       formList: ['origin', 'storageType', 'takePe', 'remark'],
-      tableList: ['code', 'productName', 'unit', 'enterNum', 'unitPrice', 'productPrice', 'remark'],
-      tableSubmitList: ['code', 'productId', 'enterNum', 'unitPrice', 'productPrice', 'remark'],
+      tableList: ['code', 'productName', 'unit', 'enterNum', 'remark'],
+      tableSubmitList: ['code', 'productId', 'enterNum', 'remark'],
       toolbarList: ['makePe', 'nowDate', 'code'],
       toolbarValues: {
         nowDate: this.$moment().format('YYYY-MM-DD'),
@@ -42,10 +41,7 @@ export default {
       submitResource: 'enterStock/detail',
       tableData: [],
       productOptions: [],
-      loading: false,
-      formTableValues: {
-        unitPrice: 1
-      }
+      loading: false
     }
   }
 }
