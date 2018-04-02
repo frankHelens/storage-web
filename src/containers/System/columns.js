@@ -141,7 +141,7 @@ export default {
       value: 'MODULE'
     }, {
       label: '页面',
-      value: 'Page'
+      value: 'PAGE'
     }]
   },
   noMenu: {
@@ -151,5 +151,47 @@ export default {
       type: 'select'
     },
     relation: 'noMenu'
+  },
+  roleName: {
+    label: '角色名称',
+    form: {
+      type: 'input'
+    },
+    filter: {
+      type: 'input'
+    }
+  },
+  roleDesc: {
+    label: '角色描述',
+    form: {
+      type: 'textarea'
+    }
+  },
+  configName: {
+    label: '配置名称',
+    form: {
+      type: 'input'
+    },
+    filter: {
+      type: 'input'
+    }
+  },
+  configValue: {
+    label: '配置值',
+    form: {
+      type: 'input'
+    },
+    filter: {
+      type: 'input'
+    }
+  },
+  configType: {
+    label: '配置类型',
+    form: {
+      type: 'input'
+    },
+    filter: {
+      type: 'input'
+    }
   }
 }
