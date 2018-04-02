@@ -62,7 +62,6 @@ export default {
   },
   methods: {
     changeValue (value) {
-      console.log(value)
       const times = value
       const result = {
         start: times[0] && times[0] !== '' ? moment(times[0], 'YYYY-MM-DD').startOf('day').format('x') : undefined,
