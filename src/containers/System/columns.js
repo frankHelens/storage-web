@@ -103,6 +103,8 @@ export default {
     label: '上级菜单',
     type: 'select',
     form: {
+      // type: 'cascader',
+      // onlySelectLeaf: false
       type: 'select'
     },
     relation: 'menuId'

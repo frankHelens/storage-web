@@ -42,7 +42,7 @@ export default {
         }
       }],
       operation: [],
-      tableInitList: ['createdAt', 'code', 'origin', 'storageType', 'enterPrice', 'takePe', 'makePe', 'remark'],
+      tableInitList: ['createdAt', 'code', 'origin', 'storageType', 'takePe', 'makePe', 'remark'],
       tableFullList: [],
       createList: [],
       updateList: [],

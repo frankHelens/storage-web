@@ -1,8 +1,4 @@
 export const baseColumns = {
-  nowDate: {
-    label: '日期',
-    size: 7
-  },
   code: {
     label: '订单编号',
     size: 10,
@@ -228,6 +224,7 @@ export const formTableColumns = {
       type: 'number',
       remoteName: 'productNum',
       isSum: true,
+      min: 0,
       chains: [{
         name: 'productPrice',
         value: 'unitPrice',

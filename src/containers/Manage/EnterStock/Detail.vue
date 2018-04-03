@@ -30,11 +30,20 @@ export default {
       tableSubmitList: ['code', 'productId', 'enterNum', 'remark'],
       toolbarList: ['makePe', 'nowDate', 'code'],
       toolbarValues: {
-        nowDate: this.$moment().format('YYYY-MM-DD'),
         makePe: localStorage.realName,
         code: ''
       },
-      columns: baseColumns,
+      columns: {
+        ...baseColumns,
+        nowDate: {
+          label: '日期',
+          size: 7,
+          type: 'custom',
+          customRender: (data, full) => {
+            return full.createdAt ? this.$moment(full.createdAt).format('YYYY-MM-DD') : this.$moment().format('YYYY-MM-DD')
+          }
+        }
+      },
       formTableColumns: formTableColumns,
       values: {},
       resource: 'enterStock/detail',
