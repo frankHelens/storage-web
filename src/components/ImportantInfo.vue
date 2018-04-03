@@ -10,6 +10,7 @@
           <info-render
             v-if="formValues"
             :data="formValues[columnName]"
+            :full="formValues"
             :column="columns[columnName]"
             :minLength="columns[columnName].minLength"
           >
