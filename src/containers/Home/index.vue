@@ -110,11 +110,11 @@ export default {
     getAccount((response) => {
       this.realName = response.realName
       this.routesPure = response.menus
+      const { matched } = this.$route
+      const { path } = matched[matched.length - 1]
+      this.getBreadcrumbList(path)
       this.hasDone = true
     })
-    const { matched } = this.$route
-    const { path } = matched[matched.length - 1]
-    this.getBreadcrumbList(path)
   },
   computed: {
     activeName () {
