@@ -5,7 +5,7 @@
   :accordion="true"
   :data="treeData"
   :default-checked-keys="Array.from(value)"
-  @check-change="treeChangeValue"
+  @check="treeChangeValueCheck"
   >
 </el-tree>  
 </template>
@@ -47,11 +47,17 @@ export default {
     }
   },
   methods: {
-    treeChangeValue (data, state, child) {
-      let currentValue = this.value
-      state && !data.children ? currentValue.add(data.value) : currentValue.delete(data.value)
-      this.$emit('changeValue', currentValue)
+    treeChangeValueCheck (data, currentValue) {
+      // halfCheckedKeys
+      const { checkedKeys } = currentValue
+      this.$emit('changeValue', checkedKeys)
     }
+    // treeChangeValue (data, state, child) {
+    //   let currentValue = this.value
+    //   state && !data.children ? currentValue.add(data.value) : currentValue.delete(data.value)
+    //   console.log(currentValue)
+    //   this.$emit('changeValue', currentValue)
+    // }
   }
 }
 </script>
