@@ -15,6 +15,7 @@
     :updateList="updateList"
     :columns="columns"
     :selection="true"
+    :relationResource="relationResource"
     :onRowDblclick="onRowDblclick">
   </DataTablePage>
 </template>
@@ -32,6 +33,7 @@ export default {
   },
   data () {
     return {
+      relationResource: 'system/relation',
       toolbar: [toolbarDelete, toolbarCreate],
       onRowDblclick: (data) => {
         const { table } = this.$refs
@@ -40,9 +42,9 @@ export default {
         table.updateDialogVisible = true
         table.updateDialogFormValues = cloneDeep(data)
       },
-      tableInitList: ['loginName', 'name', 'linkPhone', 'createdAt', 'updatedAt', 'remark'],
-      createList: ['loginName', 'loginPassword', 'name', 'linkPhone', 'remark'],
-      updateList: ['loginName', 'name', 'linkPhone', 'remark'],
+      tableInitList: ['loginName', 'name', 'linkPhone', 'roleIds', 'createdAt', 'updatedAt', 'remark'],
+      createList: ['loginName', 'loginPassword', 'name', 'linkPhone', 'roleIds', 'remark'],
+      updateList: ['loginName', 'name', 'linkPhone', 'roleIds', 'remark'],
       filterInitList: ['name', 'linkPhone', 'createdAt'],
       columns: columns
     }

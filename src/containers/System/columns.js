@@ -48,17 +48,18 @@ export default {
       type: 'select'
     }
   },
-  // roleids: {
-  //   label: '角色',
-  //   type: 'multiselect',
-  //   form: {
-  //     type: 'multiselect',
-  //     live: true,
-  //     rules: [
-  //       { type: 'array', required: true, message: '请选择角色', trigger: 'blur' }
-  //     ]
-  //   }
-  // },
+  roleIds: {
+    label: '角色',
+    type: 'select',
+    form: {
+      type: 'select',
+      live: true,
+      rules: [
+        { required: true, message: '请选择角色', trigger: 'blur' }
+      ]
+    },
+    relation: 'roleId'
+  },
   linkPhone: {
     label: '电话',
     width: 130,
@@ -195,5 +196,12 @@ export default {
     filter: {
       type: 'input'
     }
+  },
+  menuIds: {
+    label: '权限列表',
+    form: {
+      type: 'tree'
+    },
+    relation: 'menuId'
   }
 }

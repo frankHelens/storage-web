@@ -33,7 +33,7 @@ export default {
   },
   data () {
     return {
-      relationResource: 'menu/relation',
+      relationResource: 'system/relation',
       toolbar: [toolbarDelete, toolbarCreate],
       onRowDblclick: (data) => {
         const { table } = this.$refs
