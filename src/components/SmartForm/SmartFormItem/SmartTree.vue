@@ -5,6 +5,7 @@
   :accordion="true"
   :data="treeData"
   :default-checked-keys="Array.from(value)"
+  :check-strictly="true"
   @check="treeChangeValueCheck"
   >
 </el-tree>  
