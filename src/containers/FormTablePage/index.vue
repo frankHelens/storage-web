@@ -11,6 +11,7 @@
           :columns="columnsList")
     SmartForm(
       v-if="hasData"
+      ref="smartForm"
       :formList="formList"
       :columns="columnsList"
       :values="formTableData.base"
@@ -134,24 +135,31 @@ export default {
           formTable: this
         },
         func: (data, {formTable}) => {
-          const { tableSubmitList, submitResource } = formTable
-          const postData = this.setPostData(data, tableSubmitList)
-          formTable.requestData({
-            url: submitResource,
-            data: postData
-          })
-          .then(data => {
-            if (data) {
-              formTable.$message({
-                message: '操作成功！',
-                type: 'success'
+          const { tableSubmitList, submitResource, $refs } = formTable
+          // 验证
+          $refs.smartForm.$refs.form.validate((valid) => {
+            if (valid) {
+              const postData = this.setPostData(data, tableSubmitList)
+              formTable.requestData({
+                url: submitResource,
+                data: postData
               })
-              const { path, params } = formTable.$route
-              if (params.id) {
-                this.getRelation()
-              } else {
-                formTable.$router.push(path + '/' + data)
-              }
+              .then(data => {
+                if (data) {
+                  formTable.$message({
+                    message: '操作成功！',
+                    type: 'success'
+                  })
+                  const { path, params } = formTable.$route
+                  if (params.id) {
+                    this.getRelation()
+                  } else {
+                    formTable.$router.push(path + '/' + data)
+                  }
+                }
+              })
+            } else {
+              return false
             }
           })
         }

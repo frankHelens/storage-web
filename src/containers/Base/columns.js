@@ -20,7 +20,10 @@ export default {
       like: true
     },
     form: {
-      type: 'input'
+      type: 'input',
+      rules: [
+        { required: true, message: '请输入商品名称', trigger: 'blur' }
+      ]
     }
   },
   type: {

@@ -31,6 +31,9 @@ export default {
       like: true
     },
     form: {
+      rules: [
+        { required: true, message: '请输入姓名', trigger: 'blur' }
+      ],
       type: 'input'
     }
   },
@@ -53,7 +56,7 @@ export default {
     type: 'select',
     form: {
       type: 'select',
-      live: true,
+      dataType: 'number',
       rules: [
         { required: true, message: '请选择角色', trigger: 'blur' }
       ]
@@ -158,7 +161,10 @@ export default {
   roleName: {
     label: '角色名称',
     form: {
-      type: 'input'
+      type: 'input',
+      rules: [
+        { required: true, message: '请输入角色名称', trigger: 'blur' }
+      ]
     },
     filter: {
       type: 'input'

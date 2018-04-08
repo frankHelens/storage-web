@@ -24,7 +24,10 @@ export const baseColumns = {
     },
     form: {
       type: 'input',
-      size: 8
+      size: 8,
+      rules: [
+        { required: true, message: '请输入供应商', trigger: 'blur' }
+      ]
     }
   },
   storageType: {
@@ -37,7 +40,10 @@ export const baseColumns = {
     },
     form: {
       type: 'select',
-      size: 8
+      size: 8,
+      rules: [
+        { required: true, message: '请选择仓库', trigger: 'change' }
+      ]
     },
     relation: 'storageType',
     sortable: true
@@ -52,7 +58,10 @@ export const baseColumns = {
     },
     form: {
       type: 'input',
-      size: 8
+      size: 8,
+      rules: [
+        { required: true, message: '请输入收货人', trigger: 'blur' }
+      ]
     }
   },
   makePe: {

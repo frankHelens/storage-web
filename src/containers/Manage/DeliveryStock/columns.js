@@ -24,7 +24,10 @@ export const baseColumns = {
     },
     form: {
       type: 'input',
-      size: 6
+      size: 6,
+      rules: [
+        { required: true, message: '请输入客户名称', trigger: 'blur' }
+      ]
     }
   },
   deliveryPrice: {
@@ -49,7 +52,10 @@ export const baseColumns = {
     },
     form: {
       type: 'select',
-      size: 6
+      size: 6,
+      rules: [
+        { required: true, message: '请选择仓库名称', trigger: 'blur' }
+      ]
     },
     relation: 'storageType',
     sortable: true
@@ -64,7 +70,10 @@ export const baseColumns = {
     },
     form: {
       type: 'input',
-      size: 6
+      size: 6,
+      rules: [
+        { required: true, message: '请输入联系人', trigger: 'blur' }
+      ]
     }
   },
   linkPhone: {
@@ -77,7 +86,10 @@ export const baseColumns = {
     },
     form: {
       type: 'input',
-      size: 6
+      size: 6,
+      rules: [
+        { required: true, message: '请输入联系电话', trigger: 'blur' }
+      ]
     }
   },
   makePe: {
@@ -105,7 +117,10 @@ export const baseColumns = {
     },
     form: {
       type: 'input',
-      size: 12
+      size: 12,
+      rules: [
+        { required: true, message: '请输入发货地址', trigger: 'blur' }
+      ]
     }
   },
   createdAt: {
