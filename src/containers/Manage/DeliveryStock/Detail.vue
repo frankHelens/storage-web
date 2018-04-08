@@ -1,28 +1,34 @@
 <template lang="pug">
-  FormTablePage(
-    ref="formTablepage"
-    :formList="formList"
-    :tableList="tableList"
-    :tableSubmitList="tableSubmitList"
-    :tableData="tableData"
-    :columns="columns"
-    :values="values"
-    :toolbarValues="toolbarValues"
-    :toolbarList="toolbarList"
-    :resource="resource"
-    :submitResource="submitResource"
-    :formTableColumns="formTableColumns"
-    :formTableButtons="formTableButtons")
+  div
+    FormTablePage(
+      ref="formTablepage"
+      :formList="formList"
+      :tableList="tableList"
+      :tableSubmitList="tableSubmitList"
+      :tableData="tableData"
+      :columns="columns"
+      :values="values"
+      :toolbarValues="toolbarValues"
+      :toolbarList="toolbarList"
+      :resource="resource"
+      :submitResource="submitResource"
+      :formTableColumns="formTableColumns"
+      :formTableButtons="formTableButtons")
+    PrintTemp(
+      ref="print"
+    )
 </template>
 
 <script>
 import FormTablePage from '@/containers/FormTablePage'
 import { baseColumns, formTableColumns } from './columns'
+import PrintTemp from '@/containers/Manage/PrintTemp'
 
 /* globals localStorage */
 export default {
   components: {
-    FormTablePage
+    FormTablePage,
+    PrintTemp
   },
   data () {
     return {
@@ -57,6 +63,7 @@ export default {
         name: 'print',
         label: '打印',
         func: (data, props) => {
+          console.log('print', this.$refs.print.printEvent())
           console.log(data, props)
         }
       }]
