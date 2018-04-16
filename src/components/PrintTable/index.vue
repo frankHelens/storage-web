@@ -1,8 +1,10 @@
 <template lang="pug">
 div(style="display: none;")
+  div(ref="title")
+    slot(name="title")
   div(ref="print")
     slot
-      table(
+      table.table(
         border="1"
         cellpadding="0"
         cellspacing="0")
@@ -25,6 +27,17 @@ div(style="display: none;")
                 :minLength="columns[columnName].minLength"
                 :isWarp="true")
                 template(scope="props") {{ props.content}}
+          tr(v-if="isCount")
+            th.count(
+              colspan="3"
+              tdata="AllSum"
+              format="UpperMoney"
+              :tindex="printList | getIndex(columns)") 合计：######
+            th.count(
+              :colspan="printList.length - 3"
+              tdata="AllSum"
+              format="#,##0.00"
+              :tindex="printList | getIndex(columns)") ￥###
 </template>
 
 <script>
@@ -70,10 +83,18 @@ export default {
     value: {
       tpye: Boolean,
       default: false
+    },
+    isCount: {
+      type: Boolean,
+      default: false
+    }
+  },
+  filters: {
+    getIndex (list, columns) {
+      return list.findIndex(item => columns[item].isCount)
     }
   },
   data () {
-    console.log(this.dataList)
     return {
       printData: this.dataList
     }
@@ -82,7 +103,7 @@ export default {
     printEvent () { // 打印事件
       printEvent({
         dom: this.$refs.print,
-        title: this.title,
+        title: this.title || this.$refs.title.innerHTML || '',
         style: this.printStyle,
         isHorizontal: this.isHorizontal,
         el: this
