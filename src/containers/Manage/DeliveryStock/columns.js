@@ -184,6 +184,7 @@ export const formTableColumns = {
   code: {
     label: '商品编号',
     width: 180,
+    printWidth: 80,
     filter: {
       width: 80,
       type: 'input'
@@ -222,6 +223,7 @@ export const formTableColumns = {
   },
   unit: {
     label: '单位',
+    printWidth: 40,
     width: 100,
     type: 'custom',
     filter: {
@@ -236,13 +238,14 @@ export const formTableColumns = {
       remoteName: 'unit'
     },
     customRender: (data, full, column) => {
-      console.log(column.options)
-      return full.product.unit
+      const option = column.options.find(option => option.value === full.product.unit)
+      return option ? option.label : '-'
     },
     relation: 'unit'
   },
   deliveryNum: {
     label: '数量',
+    printWidth: 40,
     width: 130,
     filter: {
       type: 'input'
@@ -264,6 +267,7 @@ export const formTableColumns = {
   },
   unitPrice: {
     label: '单价',
+    printWidth: 80,
     width: 130,
     filter: {
       type: 'input'
@@ -284,6 +288,7 @@ export const formTableColumns = {
   },
   productPrice: {
     label: '金额',
+    printWidth: 80,
     width: 130,
     filter: {
       type: 'input'
@@ -295,16 +300,22 @@ export const formTableColumns = {
     form: {
       type: 'input'
     },
-    sortable: true
+    sortable: true,
+    isCount: true
   },
   remark: {
     label: '备注',
+    printWidth: 200,
     // width: 200,
     form: {
       type: 'input'
     },
     tableForm: {
       type: 'input'
+    },
+    type: 'custom',
+    customRender: (data, full) => {
+      return ' '
     }
   }
 }

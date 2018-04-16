@@ -19,17 +19,35 @@
     PrintTable(
       v-if="hasData"
       ref="print"
-      :title="title"
       :dataList="printData"
       :printList="tableList"
-      :columns="formTableColumns"
-      :isHorizontal="false")
+      :columns="printTableColumns"
+      :isHorizontal="false"
+      :printStyle="printStyle"
+      :isCount="true")
+      div(slot="title")
+        .title-wrap
+          h2.title 创发烘培设备
+          .sub-title 出货单
+          .code 单据编号： {{printBaseData.code || ''}}
+        table.title-info
+          tr
+            td(
+              width="30%"
+              v-for="(item, i) in Math.ceil(printToolbarList.length/2)"
+              :key="i") {{printToolbarList[i] | renderValue(printBaseColumns, printBaseData)}}
+          tr
+            td(
+              width="30%"
+              v-for="(item, i) in Math.ceil(printToolbarList.length/2)"
+              :key="i") {{printToolbarList[i + 3] | renderValue(printBaseColumns, printBaseData)}}
 </template>
 
 <script>
 import FormTablePage from '@/containers/FormTablePage'
 import { baseColumns, formTableColumns } from './columns'
 import PrintTable from '@/components/PrintTable'
+import { infoRender } from '@/utils/infoRender'
 
 /* globals localStorage */
 export default {
@@ -37,13 +55,19 @@ export default {
     FormTablePage,
     PrintTable
   },
+  filters: {
+    renderValue (name, columns, full) {
+      const column = columns[name]
+      return column.label + '：' + infoRender(full[name], column, full)
+    }
+  },
   data () {
     return {
-      title: '创发烘焙设备',
       formList: ['clientName', 'linkMan', 'linkPhone', 'storageType', 'clientAddress', 'remark'],
       tableList: ['code', 'productName', 'unit', 'deliveryNum', 'unitPrice', 'productPrice', 'remark'],
       tableSubmitList: ['code', 'productId', 'deliveryNum', 'unitPrice', 'productPrice', 'remark'],
       toolbarList: ['makePe', 'nowDate', 'code'],
+      printToolbarList: ['clientName', 'nowDate', 'storageType', 'clientAddress', 'linkMan', 'linkPhone'],
       columns: {
         ...baseColumns,
         nowDate: {
@@ -58,7 +82,6 @@ export default {
       formTableColumns: formTableColumns,
       values: {},
       toolbarValues: {
-        // nowDate: '',
         makePe: localStorage.realName,
         code: ''
       },
@@ -71,23 +94,51 @@ export default {
         name: 'print',
         label: '打印',
         func: (data, props) => {
-          console.log(data, props)
           this.$refs.print.printEvent()
         }
       }],
       hasData: false,
       printData: [],
-      printColumns: {}
+      printTableColumns: {},
+      printBaseData: {},
+      printBaseColumns: {},
+      printStyle: `
+        .title-wrap {
+          position: relative;
+          width: 100%;
+        }
+        .title{
+          margin: auto;
+        }
+        .sub-title, .code {
+          position: absolute;          
+        }        
+        .sub-title {
+          font-size: 19px;
+          left: 63%;
+          top: 10px;
+        }
+        .code, .title-info {
+          right: 0;
+          top: 0;
+          font-size: 14px;
+        }
+        .title-info {
+          margin: 10px 0 0 10px;
+        }
+      `
     }
   },
   methods: {
     getData ({ base, tableData }) {
+      this.printBaseData = base
       this.printData = tableData
       this.hasData = true
-      console.log(tableData)
     },
-    getRelation ({columns}) {
-      this.printColumns = columns
+    getRelation (tableColumns, columns) {
+      this.hasData = false
+      this.printTableColumns = tableColumns
+      this.printBaseColumns = columns
     }
   }
 }
