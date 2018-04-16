@@ -149,6 +149,6 @@ function down (content, url) {
     type: 'warning'
   }).then(() => {
     if (url === undefined) return
-    window.location.href = 'http://zsmr.gddxit.com:803/extend/' + url
+    window.location.href = '/tool/' + url
   })
 }
