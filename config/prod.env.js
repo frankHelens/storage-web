@@ -5,6 +5,6 @@ module.exports = {
   VERSION: '"' + packageInfo.version + '"',
   SUBVERSION: packageInfo.subversion,
   TITLE: '"' + packageInfo.title + '"',
-  API: '"/"',
+  API: '"/storage"',
   URL: '""'
 }
