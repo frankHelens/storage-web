@@ -218,6 +218,7 @@ export default {
       })
       .then(data => {
         this.hasData = true
+        this.$emit('getData', data)
         const tableData = cloneDeep(data).tableData.map(item => {
           return {
             ...getRemoteValues(item.product, this.formTableColumns),
@@ -245,7 +246,7 @@ export default {
       .then((data) => {
         this.setOptions(this.columnsList, data)
         this.setOptions(this.formTableColumnsList, data)
-        this.$emit('getRelation', this.columnsList)
+        this.$emit('getRelation', this.formTableColumnsList)
         if (this.id) {
           this.getData(this.id)
         } else {
