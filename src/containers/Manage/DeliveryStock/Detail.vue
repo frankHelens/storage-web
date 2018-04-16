@@ -13,25 +13,33 @@
       :resource="resource"
       :submitResource="submitResource"
       :formTableColumns="formTableColumns"
-      :formTableButtons="formTableButtons")
-    PrintTemp(
+      :formTableButtons="formTableButtons"
+      @getData="getData"
+      @getRelation="getRelation")
+    PrintTable(
+      v-if="hasData"
       ref="print"
-    )
+      :title="title"
+      :dataList="printData"
+      :printList="tableList"
+      :columns="formTableColumns"
+      :isHorizontal="false")
 </template>
 
 <script>
 import FormTablePage from '@/containers/FormTablePage'
 import { baseColumns, formTableColumns } from './columns'
-import PrintTemp from '@/containers/Manage/PrintTemp'
+import PrintTable from '@/components/PrintTable'
 
 /* globals localStorage */
 export default {
   components: {
     FormTablePage,
-    PrintTemp
+    PrintTable
   },
   data () {
     return {
+      title: '创发烘焙设备',
       formList: ['clientName', 'linkMan', 'linkPhone', 'storageType', 'clientAddress', 'remark'],
       tableList: ['code', 'productName', 'unit', 'deliveryNum', 'unitPrice', 'productPrice', 'remark'],
       tableSubmitList: ['code', 'productId', 'deliveryNum', 'unitPrice', 'productPrice', 'remark'],
@@ -63,10 +71,23 @@ export default {
         name: 'print',
         label: '打印',
         func: (data, props) => {
-          console.log('print', this.$refs.print.printEvent())
           console.log(data, props)
+          this.$refs.print.printEvent()
         }
-      }]
+      }],
+      hasData: false,
+      printData: [],
+      printColumns: {}
+    }
+  },
+  methods: {
+    getData ({ base, tableData }) {
+      this.printData = tableData
+      this.hasData = true
+      console.log(tableData)
+    },
+    getRelation ({columns}) {
+      this.printColumns = columns
     }
   }
 }

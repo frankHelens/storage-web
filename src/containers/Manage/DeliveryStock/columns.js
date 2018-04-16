@@ -194,6 +194,10 @@ export const formTableColumns = {
     tableForm: {
       type: 'remoteSelect',
       remoteName: 'code'
+    },
+    type: 'custom',
+    customRender: (data, full) => {
+      return full.product.code
     }
   },
   productName: {
@@ -210,12 +214,16 @@ export const formTableColumns = {
     tableForm: {
       type: 'remoteSelect',
       remoteName: 'name'
+    },
+    type: 'custom',
+    customRender: (data, full) => {
+      return full.product.name
     }
   },
   unit: {
     label: '单位',
     width: 100,
-    type: 'select',
+    type: 'custom',
     filter: {
       type: 'select',
       like: true
@@ -226,6 +234,10 @@ export const formTableColumns = {
     tableForm: {
       type: 'select',
       remoteName: 'unit'
+    },
+    customRender: (data, full, column) => {
+      console.log(column.options)
+      return full.product.unit
     },
     relation: 'unit'
   },
