@@ -246,7 +246,7 @@ export default {
       .then((data) => {
         this.setOptions(this.columnsList, data)
         this.setOptions(this.formTableColumnsList, data)
-        this.$emit('getRelation', this.formTableColumnsList)
+        this.$emit('getRelation', this.formTableColumnsList, this.columnsList)
         if (this.id) {
           this.getData(this.id)
         } else {
