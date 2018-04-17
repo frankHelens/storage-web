@@ -149,6 +149,6 @@ function down (content, url) {
     type: 'warning'
   }).then(() => {
     if (url === undefined) return
-    window.location.href = '/tool/' + url
+    window.location.href = '/tool?download=' + url
   })
 }
