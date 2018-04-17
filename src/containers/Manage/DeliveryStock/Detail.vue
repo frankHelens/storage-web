@@ -41,6 +41,13 @@
               width="30%"
               v-for="(item, i) in Math.ceil(printToolbarList.length/2)"
               :key="i") {{printToolbarList[i + 3] | renderValue(printBaseColumns, printBaseData)}}
+      div(slot="footer")
+        table.title-info
+          tr
+            td(
+              width="30%"
+              v-for="(item, i) in printFooterList"
+              :key="i") {{item | renderValue(printBaseColumns, printBaseData)}}
 </template>
 
 <script>
@@ -68,6 +75,7 @@ export default {
       tableSubmitList: ['code', 'productId', 'deliveryNum', 'unitPrice', 'productPrice', 'remark'],
       toolbarList: ['makePe', 'nowDate', 'code'],
       printToolbarList: ['clientName', 'nowDate', 'storageType', 'clientAddress', 'linkMan', 'linkPhone'],
+      printFooterList: ['makePe', 'agent', 'salesman'],
       columns: {
         ...baseColumns,
         nowDate: {
@@ -124,6 +132,7 @@ export default {
           font-size: 14px;
         }
         .title-info {
+          width: 100%;
           margin: 10px 0 0 10px;
         }
       `

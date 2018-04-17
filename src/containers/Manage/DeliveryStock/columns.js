@@ -162,6 +162,16 @@ export const baseColumns = {
     tableForm: {
       type: 'input'
     }
+  },
+  agent: {
+    label: '经办人',
+    type: 'custom',
+    customRender: () => ' '
+  },
+  salesman: {
+    label: '业务员',
+    type: 'custom',
+    customRender: () => ' '
   }
 }
 
