@@ -38,6 +38,8 @@ div(style="display: none;")
               tdata="AllSum"
               format="#,##0.00"
               :tindex="printList | getIndex(columns)") ￥###
+  div(ref="footer")
+    slot(name="footer")
 </template>
 
 <script>
@@ -106,7 +108,8 @@ export default {
         title: this.title || this.$refs.title.innerHTML || '',
         style: this.printStyle,
         isHorizontal: this.isHorizontal,
-        el: this
+        el: this,
+        footer: this.$refs.footer.innerHTML || ''
       })
     }
   }

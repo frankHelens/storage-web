@@ -1,6 +1,6 @@
 import { getLodop } from '@/utils/LodopFuncs'
 
-export const printEvent = ({ isHorizontal, dom, style, title, el }) => {
+export const printEvent = ({ isHorizontal, dom, style, title, el, footer }) => {
   const LODOP = getLodop()
   // 样式
   const css = `<style>
@@ -14,7 +14,6 @@ export const printEvent = ({ isHorizontal, dom, style, title, el }) => {
   </style>`
   // 打印内容
   const html = dom.innerHTML
-  // const footer = `<p><span style="margin-right:20px;">打印人：${localStorage.realname}</span><span>打印日期：${el.$moment().format('YYYY-MM-DD')}</span></p>`
   LODOP.PRINT_INIT('printInit') // 打印初始化
   LODOP.SET_PRINT_PAGESIZE(2, '100%', '100%', 'A5')
   // 横向时的正向显示
@@ -24,11 +23,11 @@ export const printEvent = ({ isHorizontal, dom, style, title, el }) => {
   // // 标题
   LODOP.ADD_PRINT_HTM(10, 0, 700, 1100, css + title)
   // 内容
-  LODOP.ADD_PRINT_TABLE(95, 0, 700, 950, css + html)
+  LODOP.ADD_PRINT_TABLE(95, 0, 700, 370, css + html)
   LODOP.SET_PRINT_STYLEA(0, 'Offset2Top', -90)
   // 打印人 跟 时间
-  // LODOP.ADD_PRINT_HTM(1050, '5%', '80%', 100, css + footer)
-  // LODOP.SET_PRINT_STYLEA(0, 'ItemType', 1)
+  LODOP.ADD_PRINT_HTM(500, '5%', '80%', 100, css + footer)
+  LODOP.SET_PRINT_STYLEA(0, 'ItemType', 1)
   // 分页
   // LODOP.ADD_PRINT_HTM(1050, '70%', 300, 100, '总页号：<font color="#0000ff" format="0" style="color:#000;"><span tdata="pageNO">第###页</span>/<span tdata="pageCount">共###页</span></font>')
   // LODOP.SET_PRINT_STYLEA(0, 'ItemType', 1)
