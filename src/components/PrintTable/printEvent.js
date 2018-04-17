@@ -25,6 +25,7 @@ export const printEvent = ({ isHorizontal, dom, style, title, el }) => {
   LODOP.ADD_PRINT_HTM(10, 0, 700, 1100, css + title)
   // 内容
   LODOP.ADD_PRINT_TABLE(95, 0, 700, 950, css + html)
+  LODOP.SET_PRINT_STYLEA(0, 'Offset2Top', -90)
   // 打印人 跟 时间
   // LODOP.ADD_PRINT_HTM(1050, '5%', '80%', 100, css + footer)
   // LODOP.SET_PRINT_STYLEA(0, 'ItemType', 1)
