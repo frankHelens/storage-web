@@ -164,12 +164,12 @@ export const baseColumns = {
     }
   },
   agent: {
-    label: '经办人',
+    label: '送货员',
     type: 'custom',
     customRender: () => ' '
   },
   salesman: {
-    label: '业务员',
+    label: '客户签名',
     type: 'custom',
     customRender: () => ' '
   }

@@ -33,19 +33,19 @@
         table.title-info
           tr
             td(
-              width="30%"
+              width="33%"
               v-for="(item, i) in Math.ceil(printToolbarList.length/2)"
               :key="i") {{printToolbarList[i] | renderValue(printBaseColumns, printBaseData)}}
           tr
             td(
-              width="30%"
+              width="33%"
               v-for="(item, i) in Math.ceil(printToolbarList.length/2)"
               :key="i") {{printToolbarList[i + 3] | renderValue(printBaseColumns, printBaseData)}}
       div(slot="footer")
         table.title-info
           tr
             td(
-              width="30%"
+              width="33%"
               v-for="(item, i) in printFooterList"
               :key="i") {{item | renderValue(printBaseColumns, printBaseData)}}
 </template>
