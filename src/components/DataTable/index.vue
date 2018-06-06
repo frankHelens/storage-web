@@ -66,10 +66,6 @@ export default {
       default: () => ({})
     }
   },
-  data () {
-    return {
-    }
-  },
   computed: {
     columnsList () {
       const tableList = this.tableInitList.map(item => {

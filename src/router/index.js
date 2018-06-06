@@ -6,7 +6,7 @@ import Login from '@/containers/Login'
 import NotFound from '@/containers/Common/NotFound'
 import baseRoutes from './base'
 import manageRoutes from './manage'
-import Test from '@/containers/Test'
+import Stat from '@/containers/Stat'
 import systemRoutes from './system'
 
 function requireAuth (to, from, next) {
@@ -26,7 +26,8 @@ const routes = [
     children: [
       baseRoutes,
       manageRoutes,
-      systemRoutes
+      systemRoutes,
+      { path: '/stat', component: Stat }
     ],
     redirect: '/base/product',
     beforeEnter: requireAuth
@@ -38,8 +39,7 @@ const routes = [
       next('/login')
     }
   },
-  { path: '*', component: NotFound },
-  { path: '/test', component: Test }
+  { path: '*', component: NotFound }
 ]
 
 const router = new VueRouter({

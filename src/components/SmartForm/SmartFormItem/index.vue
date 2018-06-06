@@ -86,16 +86,13 @@
       :disabled="column.form.disabled"
       :dataType="column.dataType"
       :shortcuts="column.shortcuts"
-      @changeValue="changeFormValue"
-    />
+      @changeValue="changeFormValue"/>
     <smart-date-range
       v-else-if="column.form.type === 'daterange'"
       :currentValue="value"
-      :disabled="column.form.disabled"
-      :dataType="column.dataType"
       :shortcuts="column.shortcuts"
-      @changeValue="changeFormValue"
-    />
+      v-bind="column.form"
+      @changeValue="changeFormValue"/>
     <smart-tree
       v-else-if="column.form.type === 'tree'"
       :currentValue="value"
@@ -104,8 +101,7 @@
       :options="column.options"
       :dataType="column.dataType"
       :live="column.live"
-      @changeValue="changeFormValue"
-    />
+      @changeValue="changeFormValue"/>
     <smart-multiselect
       v-else-if="column.form.type === 'multiselect'"
       :style="formStyle"
@@ -114,8 +110,7 @@
       :options="column.options"
       :dataType="column.dataType"
       :live="column.live"
-      @changeValue="changeFormValue"
-    />
+      @changeValue="changeFormValue"/>
     <smart-Upload
       v-else-if="column.form.type === 'file'"
       :url="column.form.url"
@@ -124,14 +119,12 @@
       :currentValue="value"
       :hintContent="column.form.hintContent"
       :dataType="column.dataType"
-      @changeValue="changeFormValue"
-    />
+      @changeValue="changeFormValue"/>
     <smart-color
       v-else-if="column.form.type === 'color'"
       :currentValue="value"
       :disabled="column.form.disabled"
-      @changeValue="changeFormValue"
-    />
+      @changeValue="changeFormValue"/>
   </el-form-item>
 </template>
 

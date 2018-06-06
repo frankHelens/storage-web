@@ -11,14 +11,14 @@ var config = require('../config')
 var webpackConfig = require('./webpack.prod.conf')
 var spinner = ora('building for production...')
 const low = require('lowdb')
-const db = low('package.json')
+// const db = low('package.json')
   // const { exec, execFileSync } = require('child_process')
 const moment = require('moment')
 
-const newSubversion = config.build.env.SUBVERSION + 1
-const newVersion = 'V' + config.build.env.VERSION.substr(1, config.build.env.VERSION.length - 2) + '.' + newSubversion
-db.set('subversion', newSubversion)
-  .write()
+// const newSubversion = config.build.env.SUBVERSION + 1
+// const newVersion = 'V' + config.build.env.VERSION.substr(1, config.build.env.VERSION.length - 2) + '.' + newSubversion
+// db.set('subversion', newSubversion)
+//   .write()
 spinner.start()
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if(err) throw err

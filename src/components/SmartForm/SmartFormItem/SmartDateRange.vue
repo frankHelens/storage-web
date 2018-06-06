@@ -1,12 +1,13 @@
 <template>
   <DatePicker
     type="daterange"
-    placement="bottom-end"
+    :placement="placement"
     v-model="value"
     :disabled="disabled"
     :placeholder="placeholder"
+    :options="options"
     @on-change="changeValue"
-    style="width: 150px"></DatePicker>
+    :style="dateStyle"></DatePicker>
   <!-- <el-date-picker
     v-model="value"
     type="daterange"
@@ -39,25 +40,24 @@ export default {
     currentValue: {
       type: String | Number
     },
-    shortcuts: {
-      type: Array
-    },
     options: {
-      type: Array,
-      default: () => []
+      type: Object,
+      default: () => ({})
+    },
+    placement: {
+      type: String,
+      default: 'bottom-end'
+    },
+    dateStyle: {
+      type: Object,
+      default: () => ({
+        width: '150px'
+      })
     }
   },
   data () {
     return {
-      pickerOptions: {
-        shortcuts: this.shortcuts
-      },
       value: this.currentValue
-    }
-  },
-  computed: {
-    getAlign () {
-      return this.shortcuts && this.shortcuts.length ? 'align' : ''
     }
   },
   methods: {
