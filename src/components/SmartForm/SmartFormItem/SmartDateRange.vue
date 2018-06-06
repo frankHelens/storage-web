@@ -6,8 +6,8 @@
     :disabled="disabled"
     :placeholder="placeholder"
     :options="options"
-    @on-change="changeValue"
-    :style="dateStyle"></DatePicker>
+    :style="dateStyle"
+    @on-change="changeValue"/>
   <!-- <el-date-picker
     v-model="value"
     type="daterange"
